@@ -2064,7 +2064,7 @@ ID,Year,Competition,Round,GameTimeUTC,GameTimeLocal,HomeTeam,AwayTeam,Ground,Sco
 7191,2023,HA,1,2023-03-19 04:20:00+00:00,2023-03-19 15:20:00+11:00,Hawthorn,Essendon,MCG,65-124,Essendon,2.15,1.68,Essendon,1.0
 7192,2023,HA,1,2023-03-19 05:40:00+00:00,2023-03-19 16:40:00+11:00,St Kilda,Fremantle,Docklands,67-52,St Kilda,2.92,1.39,Fremantle,0.0
 7193,2023,HA,2,2023-03-23 08:20:00+00:00,2023-03-23 19:20:00+11:00,Carlton,Geelong,MCG,90-82,Carlton,2.45,1.53,Carlton,1.0
-7194,2023,HA,2,2023-03-24 08:50:00+00:00,2023-03-24 19:50:00+11:00,Brisbane,Melbourne,Gabba,,,2.1,1.72,Brisbane,
+7194,2023,HA,2,2023-03-24 08:50:00+00:00,2023-03-24 19:50:00+11:00,Brisbane,Melbourne,Gabba,93-82,Brisbane,2.1,1.72,Brisbane,1.0
 7195,2023,HA,2,2023-03-25 02:45:00+00:00,2023-03-25 13:45:00+11:00,Collingwood,Port Adelaide,MCG,,,1.51,2.5,Collingwood,
 7196,2023,HA,2,2023-03-25 05:35:00+00:00,2023-03-25 16:35:00+11:00,Adelaide,Richmond,Adelaide,,,2.37,1.56,Richmond,
 7197,2023,HA,2,2023-03-25 08:25:00+00:00,2023-03-25 19:25:00+11:00,Western Bulldogs,St Kilda,Docklands,,,1.52,2.49,Western Bulldogs,

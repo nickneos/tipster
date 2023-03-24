@@ -60,7 +60,7 @@ def main():
     data = []
     for row in db_qry(DB, "SELECT ID, GameTimeUTC FROM tbl_fixture "):
         data.append({
-            "id": row[0], 
+            "id": row[0],
             "datetime": utc_to_local(row[1])
         })
     db_qry_many(DB, f"UPDATE tbl_fixture SET GameTimeLocal = :datetime WHERE ID = :id", data)
@@ -84,7 +84,7 @@ def main():
             simulate()
 
         # [MENU OPTION 4] PRINT AFL LADDER
-        elif sel == MENU[3]:    
+        elif sel == MENU[3]:
             get_afl_ladder(DB)
             db_print(DB, f"SELECT * FROM tbl_ladder")
 
@@ -98,9 +98,9 @@ def main():
 def db_import_csv(db, csv):
 
     try:
-        # create db if doesnt exist   
-        conn = sqlite3.connect(db) 
-        c = conn.cursor() 
+        # create db if doesnt exist
+        conn = sqlite3.connect(db)
+        c = conn.cursor()
 
         # load into df
         df = pd.read_csv(csv)
@@ -112,19 +112,19 @@ def db_import_csv(db, csv):
         c.close()
 
         return db
-    
+
     except Exception as e:
         print(f"{FAIL}Couldn't import {csv} into {db}\n{e}{ENDC}")
         return None
 
 
 def db_qry(db, sql, param=None):
-    
+
     try:
-        conn = sqlite3.connect(db) 
+        conn = sqlite3.connect(db)
         c = conn.cursor()
         if param is None:
-            c.execute(sql) 
+            c.execute(sql)
         else:
             c.execute(sql, param)
         result = c.fetchall()
@@ -139,16 +139,16 @@ def db_qry(db, sql, param=None):
                 return result[0]
         else:
             return result
-        
+
     except Exception as e:
         print(f"{FAIL}{e}{ENDC}")
         return None
-    
+
 
 def db_qry_many(db, sql, param):
 
     try:
-        conn = sqlite3.connect(db) 
+        conn = sqlite3.connect(db)
         c = conn.cursor()
         c.executemany(sql, param)
         result = c.fetchall()
@@ -157,7 +157,7 @@ def db_qry_many(db, sql, param):
         c.close()
 
         return result
-        
+
     except Exception as e:
         print(f"{FAIL}{e}{ENDC}")
         return None
@@ -167,14 +167,14 @@ def db_print(db, sql):
 
     try:
         # Read sqlite query results into a pandas DataFrame
-        conn = sqlite3.connect(db) 
+        conn = sqlite3.connect(db)
         df = pd.read_sql_query(sql, conn)
 
         # print df
         print(f"\n{df.to_string(index=False)}\n")
 
         conn.close()
-    
+
     except Exception as e:
         print(f"\n{FAIL}Couldn't output data\n{e}\n{ENDC}")
 
@@ -195,9 +195,6 @@ def update_csv(csv, db, sql):
 def update_odds(db):
 
     try:
-        # get df for odds
-        # df_odds = get_afl_odds()
-
         # URL for scraping AFL odds
         url = "https://www.sportsbet.com.au/betting/australian-rules/afl"
 
@@ -205,29 +202,38 @@ def update_odds(db):
         page = urllib.request.urlopen(url)
         soup = BeautifulSoup(page, 'html.parser')
 
-        # get the relevant part of the soup
+        #  get the round number
+        round = soup.find("li", attrs={"data-automation-id": "competition-round-selector-1"}).getText()
+
+        # get the matchs from soup
         regex = re.compile("\d+-competition-event-card")
-        soup = soup.find_all("div", attrs={"data-automation-id": regex})
+        matches = soup.find_all("div", attrs={"data-automation-id": regex})
 
-        # extract out odds from soup for each market
+        # extract out time
+        event_times = []
+        for match in matches:
+            et = match.find("span", attrs={"data-automation-id": "competition-event-card-time"})
+            event_times.append(et.getText())
+
+        # extract out odds for each market
         mkt_odds = []
-        for s in soup:
-            t = s.find_all("span", attrs={"data-automation-id": "price-text"})
-            mkt_odds.append(cleaner(t))
+        for match in matches:
+            o = match.find_all("span", attrs={"data-automation-id": "price-text"})
+            mkt_odds.append(cleaner(o))
 
-        # extract out market labels from soup
+        # extract out market labels
         mkt_labels = []
-        for s in soup:
-            t = s.find_all(
+        for match in matches:
+            mkt = match.find_all(
                 "div", attrs={"data-automation-id": "market-coupon-label"})
-            mkt_labels.append(cleaner(t))
+            mkt_labels.append(cleaner(mkt))
 
-        # extract out participants from soup
+        # extract out participants
         participants = []
         regex = re.compile("(participant-(one|two))")
-        for s in soup:
-            t = s.find_all("div", attrs={"data-automation-id": regex})
-            participants.append(cleaner(t))
+        for match in matches:
+            team = match.find_all("div", attrs={"data-automation-id": regex})
+            participants.append(cleaner(team))
 
         # all lists should be same size (number of matches)
         if (len(mkt_odds) != len(mkt_labels)
@@ -235,6 +241,7 @@ def update_odds(db):
                 or len(mkt_labels) != len(participants)):
             return None
 
+        #  reset list of matches
         matches = []
 
         # loop through each match
@@ -243,6 +250,7 @@ def update_odds(db):
             teams = participants[i]
             mkts = mkt_labels[i]
             odds = mkt_odds[i]
+            dt = datetime.strptime(f"{event_times[i]} {YEAR}", "%A, %d %b %H:%M %Y")
 
             # loop through all the betting markets for the match
             # eg. head to head, line, etc
@@ -251,16 +259,27 @@ def update_odds(db):
                 if mkt.lower() == "head to head":
                     odds_home = odds[j * 2]
                     odds_away = odds[j * 2 + 1]
+                    market = mkt
                     break
 
-            # add tuple to list
-            match = (odds_home, odds_away, fix_team_name(teams[0]), fix_team_name(teams[1]), str(YEAR))
-            matches.append(match)
+            # add dict to list of matches
+            matches.append({
+                "event_time": dt,
+                "round": round,
+                "home_team": fix_team_name(teams[0]),
+                "away_team": fix_team_name(teams[1]),
+                "market": market,
+                "home_odds": odds_home,
+                "away_odds": odds_away
+            })
 
+
+        # update sql table
         sql = '''
             UPDATE tbl_fixture
-            SET HomeOdds=?, AwayOdds=? 
-            WHERE HomeTeam=? AND AwayTeam=? and strftime('%Y', gametimelocal) = ? AND competition = 'HA'
+            SET HomeOdds=:home_odds, AwayOdds=:away_odds
+            WHERE HomeTeam=:home_team AND AwayTeam=:away_team and Round=:round AND competition = 'HA'
+                AND GameTimeUTC > CURRENT_TIMESTAMP
         '''
         db_qry_many(db, sql, matches)
 
@@ -284,7 +303,7 @@ def update_results(db):
         soup = BeautifulSoup(page, 'html.parser')
 
         matches = []
-        
+
         regex = re.compile("((dark|light)color)")
         for s in soup.find_all("tr", attrs={"class": regex}):
             try:
@@ -293,38 +312,38 @@ def update_results(db):
                 home_team = teams[0][0]
                 away_team = teams[1][0]
                 score = d[4]
-                
+
                 # break out of loop if match has no score
                 if score == "":
                     break
-                
+
                 # determine winner
                 scores = re.split("-", score)
-                
+
                 if int(scores[0]) > int(scores[1]):
                     winner = home_team
                 elif int(scores[0]) < int(scores[1]):
                     winner = away_team
                 else:
-                    winner = "Draw"                
+                    winner = "Draw"
 
                 match = {
-                    "score": score, 
-                    "winner": winner, 
-                    "home_team": home_team, 
-                    "away_team": away_team, 
+                    "score": score,
+                    "winner": winner,
+                    "home_team": home_team,
+                    "away_team": away_team,
                     "year": str(YEAR)
                 }
                 matches.append(match)
-                
+
             except IndexError:
                 continue
 
         sql = '''
-            UPDATE tbl_fixture 
-            SET score=:score, result=:winner, 
-                tipoutcome = CASE 
-                    WHEN tipsterspick=:winner THEN 1 
+            UPDATE tbl_fixture
+            SET score=:score, result=:winner,
+                tipoutcome = CASE
+                    WHEN tipsterspick=:winner THEN 1
                     WHEN :winner='Draw' THEN 1
                     ELSE 0 END
             WHERE HomeTeam=:home_team AND AwayTeam=:away_team and strftime('%Y', gametimelocal)=:year AND competition = 'HA'
@@ -357,7 +376,7 @@ def tip_wizard(match):
             odds2 = 0
 
         # calculation for determining strength (s) in the difference between the odds
-        n = abs((odds1 * 100) - (odds2 * 100)) 
+        n = abs((odds1 * 100) - (odds2 * 100))
         s = (n / 20) - 1
         if s < 0:
             s = 0
@@ -420,7 +439,7 @@ def get_afl_ladder(db):
         df = df.dropna(how="all")
 
         # write df to sql
-        conn = sqlite3.connect(db) 
+        conn = sqlite3.connect(db)
         df.to_sql('tbl_ladder', conn, if_exists='replace', index = False)
         conn.commit()
         conn.close
@@ -479,7 +498,7 @@ def tipster_menu():
         if sel >= 1 and sel <= len(MENU):
             break
 
-    return MENU[sel - 1] 
+    return MENU[sel - 1]
 
 
 def option_one():
@@ -492,7 +511,7 @@ def option_one():
     today = datetime.today().date()
     curr_rnd =  db_qry(DB, f"SELECT MIN(round) FROM tbl_fixture WHERE gametimelocal >= ? AND competition = 'HA'", (today,))
 
-    # # update tipster picks for current round 
+    # # update tipster picks for current round
     for row in db_qry(DB, f"SELECT ID, {PRINTABLE_COLS} FROM tbl_fixture WHERE round = {curr_rnd} and strftime('%Y', gametimelocal) = '{YEAR}' AND competition = 'HA'"):
         match = {
             "Home_Team": row[3],
@@ -515,7 +534,7 @@ def option_one():
             sum(TipOutcome) as `Tip Score`,
             count(*) as `No of Matches`,
             round((sum(TipOutcome)/count(*)) * 100, 1) as `Percentage (%)`
-        FROM tbl_fixture 
+        FROM tbl_fixture
         WHERE strftime('%Y', gametimelocal) = '{YEAR}' AND competition = 'HA' AND tipoutcome is not null
         ''')
 
@@ -529,20 +548,20 @@ def option_two():
             continue
         if n >= 1 and n <= 24:
             break
-    
+
     db_print(DB, f"SELECT {PRINTABLE_COLS} FROM tbl_fixture WHERE round = {n} and strftime('%Y', gametimelocal) = '{YEAR}' AND competition = 'HA'")
 
 
 def simulate(db = DB, SeasonStart = 2013):
 
     for y in range(SeasonStart, YEAR):
-        
+
         # for storing picks
         data = []
 
         # query to loop through
         sql = f'''
-            SELECT ID, {PRINTABLE_COLS} 
+            SELECT ID, {PRINTABLE_COLS}
             FROM tbl_fixture
             WHERE strftime('%Y', gametimelocal) = ? AND competition = 'HA'
         '''
@@ -559,7 +578,7 @@ def simulate(db = DB, SeasonStart = 2013):
 
         # update db with picks
         sql = '''
-            UPDATE tbl_fixture 
+            UPDATE tbl_fixture
             SET TipstersPick = :pick,
                 TipOutcome = CASE WHEN result=:pick OR result='Draw' THEN 1 ELSE 0 END
             WHERE ID=:id AND competition='HA'
@@ -572,16 +591,16 @@ def simulate(db = DB, SeasonStart = 2013):
             sum(TipOutcome) as `Tip Score`,
             count(*) as `No of Matches`,
             round((sum(TipOutcome)/count(*)) * 100, 1) as `Percentage (%)`
-        FROM tbl_fixture 
+        FROM tbl_fixture
         WHERE competition = 'HA' AND Year < {YEAR}
         GROUP BY Year
         UNION SELECT 'Total' as Season,
             sum(TipOutcome) as `Tip Score`,
             count(*) as `No of Matches`,
             round((sum(TipOutcome)/count(*)) * 100, 1) as `Percentage (%)`
-        FROM tbl_fixture 
+        FROM tbl_fixture
         WHERE competition = 'HA' AND Year < {YEAR}
-    ''')      
+    ''')
 
 
 if __name__ == '__main__':
