@@ -3,8 +3,13 @@ import pandas as pd
 import re
 import sqlite3
 import urllib.request
+
 from bs4 import BeautifulSoup
-from datetime import datetime, timezone
+from datetime import datetime
+from helpers import (
+    db_import_csv, db_qry, db_qry_many, db_print, 
+    utc_to_local, update_csv, cleaner, fix_team_name
+)
 
 
 # set this to your team if you want to improve their tipping score (by the SENTIMENTAL_POINTS) so you tip them more often
@@ -25,7 +30,7 @@ MENU = [
     "Print Ladder",
     "Exit"
 ]
-PRINTABLE_COLS = "GameTimeLocal, Round, HomeTeam, HomeOdds, AwayTeam, AwayOdds, Score, Result, TipstersPick, TipOutcome"
+PRINTABLE_COLS = "GameTimeLocal, Round, HomeTeam, HomeOdds, AwayTeam, AwayOdds, TipstersPick, Result, Score, TipOutcome"
 
 # Colours
 HEADER = '\033[95m'
@@ -47,8 +52,7 @@ ASCII_ART = f'' \
     '         |__|       \/            \/        ' + f'\n'
 
 
-def main():
-
+def tipster_load():
     # if csv doesnt exist, download
     if not os.path.exists(CSV_FILE):
         urllib.request.urlretrieve(CSV_URL, CSV_FILE)
@@ -64,132 +68,6 @@ def main():
             "datetime": utc_to_local(row[1])
         })
     db_qry_many(DB, f"UPDATE tbl_fixture SET GameTimeLocal = :datetime WHERE ID = :id", data)
-
-    ##### USER MENU #####
-    print(f"\n{HEADER}{ASCII_ART}{ENDC}\n")
-
-    while True:
-        sel = tipster_menu()
-
-        # [MENU OPTION 1] Print current round with tipsters picks
-        if sel == MENU[0]:
-            option_one()
-
-        # [MENU OPTION 2] Print selected round
-        elif sel == MENU[1]:
-            option_two()
-
-        # [MENU OPTION 3] Simulate
-        elif sel == MENU[2]:
-            simulate()
-
-        # [MENU OPTION 4] PRINT AFL LADDER
-        elif sel == MENU[3]:
-            get_afl_ladder(DB)
-            db_print(DB, f"SELECT * FROM tbl_ladder")
-
-        # [MENU OPTION EXIT]
-        if sel.lower() == "exit":
-            # write back to csv
-            update_csv(CSV_FILE, DB, "select * from tbl_fixture")
-            break
-
-
-def db_import_csv(db, csv):
-
-    try:
-        # create db if doesnt exist
-        conn = sqlite3.connect(db)
-        c = conn.cursor()
-
-        # load into df
-        df = pd.read_csv(csv)
-
-        # write to sql
-        df.to_sql('tbl_fixture', conn, if_exists='replace', index = False)
-
-        conn.commit()
-        c.close()
-
-        return db
-
-    except Exception as e:
-        print(f"{FAIL}Couldn't import {csv} into {db}\n{e}{ENDC}")
-        return None
-
-
-def db_qry(db, sql, param=None):
-
-    try:
-        conn = sqlite3.connect(db)
-        c = conn.cursor()
-        if param is None:
-            c.execute(sql)
-        else:
-            c.execute(sql, param)
-        result = c.fetchall()
-
-        conn.commit()
-        c.close()
-
-        if len(result) == 1:
-            if len(result[0]) == 1:
-                return result[0][0]
-            else:
-                return result[0]
-        else:
-            return result
-
-    except Exception as e:
-        print(f"{FAIL}{e}{ENDC}")
-        return None
-
-
-def db_qry_many(db, sql, param):
-
-    try:
-        conn = sqlite3.connect(db)
-        c = conn.cursor()
-        c.executemany(sql, param)
-        result = c.fetchall()
-
-        conn.commit()
-        c.close()
-
-        return result
-
-    except Exception as e:
-        print(f"{FAIL}{e}{ENDC}")
-        return None
-
-
-def db_print(db, sql):
-
-    try:
-        # Read sqlite query results into a pandas DataFrame
-        conn = sqlite3.connect(db)
-        df = pd.read_sql_query(sql, conn)
-
-        # print df
-        print(f"\n{df.to_string(index=False)}\n")
-
-        conn.close()
-
-    except Exception as e:
-        print(f"\n{FAIL}Couldn't output data\n{e}\n{ENDC}")
-
-
-def update_csv(csv, db, sql):
-    """ Update csv from sqlite3 table """
-
-    try:
-        conn = sqlite3.connect(db)
-        df = pd.read_sql_query(sql, conn)
-        df.to_csv(csv, index=False)
-        conn.close
-
-    except Exception as e:
-        print(f"{FAIL}Couldn't update {csv}\n{e}{ENDC}")
 
 
 def update_odds(db):
@@ -278,7 +156,7 @@ def update_odds(db):
         sql = '''
             UPDATE tbl_fixture
             SET HomeOdds=:home_odds, AwayOdds=:away_odds
-            WHERE HomeTeam=:home_team AND AwayTeam=:away_team and Round=:round AND competition = 'HA'
+            WHERE HomeTeam=:home_team AND AwayTeam=:away_team and Round=:round
                 AND GameTimeUTC > CURRENT_TIMESTAMP
         '''
         db_qry_many(db, sql, matches)
@@ -346,7 +224,7 @@ def update_results(db):
                     WHEN tipsterspick=:winner THEN 1
                     WHEN :winner='Draw' THEN 1
                     ELSE 0 END
-            WHERE HomeTeam=:home_team AND AwayTeam=:away_team and strftime('%Y', gametimelocal)=:year AND competition = 'HA'
+            WHERE HomeTeam=:home_team AND AwayTeam=:away_team and strftime('%Y', gametimelocal)=:year
         '''
         db_qry_many(db, sql, matches)
 
@@ -427,7 +305,7 @@ def tip_wizard(match):
         return team1
 
 
-def get_afl_ladder(db):
+def get_afl_ladder(db=DB, cli=False):
     """ Gets AFL Ladder and updates db """
 
     url = f"https://www.footywire.com/afl/footy/ft_ladder?year={YEAR}"
@@ -443,43 +321,18 @@ def get_afl_ladder(db):
         df.to_sql('tbl_ladder', conn, if_exists='replace', index = False)
         conn.commit()
         conn.close
+        if cli:
+            print(f"{OKGREEN}Ladder updated{ENDC}")
 
-        print(f"{OKGREEN}Ladder updated{ENDC}")
-        return db
+        ladder = db_qry(DB, f"SELECT * FROM tbl_ladder")
+        if cli:
+            db_print(ladder, [])
+
+        return ladder
 
     except Exception as e:
         print(f"\n {FAIL}Issue getting AFL Ladder\n{e}{ENDC}")
         return None
-
-
-def cleaner(list):
-    """" Cleans the lists extracted from beautiful soup """
-
-    content = []
-    for li in list:
-        content.append(li.getText().replace("\n", " ").replace("\t""", " "))
-    # print(content)
-    return content
-
-
-def fix_team_name(teamname):
-    """ Standardise team names """
-    if teamname == "Greater Western Sydney":
-        teamname = "GWS"
-
-    return teamname
-
-
-def utc_to_local(utc_dt):
-    """ Converts utc datetime to local datetime"""
-
-    if type(utc_dt) == str:
-        try:
-            utc_dt = datetime.fromisoformat(utc_dt)
-        except:
-            utc_dt = None
-
-    return utc_dt.replace(tzinfo=timezone.utc).astimezone(tz=None)
 
 
 def tipster_menu():
@@ -501,7 +354,7 @@ def tipster_menu():
     return MENU[sel - 1]
 
 
-def option_one():
+def get_current_round(cli = False):
 
     # update odds and results
     update_odds(DB)
@@ -509,10 +362,10 @@ def option_one():
 
     # get round number that is the round in progress (or upcoming round if none in progress)
     today = datetime.today().date()
-    curr_rnd =  db_qry(DB, f"SELECT MIN(round) FROM tbl_fixture WHERE gametimelocal >= ? AND competition = 'HA'", (today,))
+    curr_rnd =  db_qry(DB, f"SELECT MIN(round) FROM tbl_fixture WHERE gametimelocal >= ?", (today,))
 
     # # update tipster picks for current round
-    for row in db_qry(DB, f"SELECT ID, {PRINTABLE_COLS} FROM tbl_fixture WHERE round = {curr_rnd} and strftime('%Y', gametimelocal) = '{YEAR}' AND competition = 'HA'"):
+    for row in db_qry(DB, f"SELECT ID, {PRINTABLE_COLS} FROM tbl_fixture WHERE round = {curr_rnd} and strftime('%Y', gametimelocal) = '{YEAR}'"):
         match = {
             "Home_Team": row[3],
             "Odds_Home": row[4],
@@ -520,39 +373,53 @@ def option_one():
             "Odds_Away": row[6]
         }
         pick = (tip_wizard(match))
-        db_qry(DB, f"UPDATE tbl_fixture SET TipstersPick = ? WHERE ID = ? AND competition = 'HA'", (pick, row[0]))
+        db_qry(DB, f"UPDATE tbl_fixture SET TipstersPick = ? WHERE ID = ?", (pick, row[0]))
 
     #  update csv
-    update_csv(CSV_FILE, DB, "select * from tbl_fixture")
+    update_csv("select * from tbl_fixture")
+    
+    sql = f"SELECT {PRINTABLE_COLS} FROM tbl_fixture WHERE round = ? and strftime('%Y', gametimelocal) = ?"
+    data = db_qry(DB, sql, (curr_rnd, f"{YEAR}"))
 
     # print current round
-    db_print(DB, f"SELECT {PRINTABLE_COLS} FROM tbl_fixture WHERE round = {curr_rnd} and strftime('%Y', gametimelocal) = '{YEAR}' AND competition = 'HA'")
+    if cli:
+        db_print(data, PRINTABLE_COLS)
 
-    # print stats
-    db_print(DB, f'''
-        SELECT Year as Season,
-            sum(TipOutcome) as `Tip Score`,
-            count(*) as `No of Matches`,
-            round((sum(TipOutcome)/count(*)) * 100, 1) as `Percentage (%)`
-        FROM tbl_fixture
-        WHERE strftime('%Y', gametimelocal) = '{YEAR}' AND competition = 'HA' AND tipoutcome is not null
-        ''')
+        # print stats
+        sql = f'''
+            SELECT Year as Season,
+                sum(TipOutcome) as `Tip Score`,
+                count(*) as `No of Matches`,
+                round((sum(TipOutcome)/count(*)) * 100, 1) as `Percentage (%)`
+            FROM tbl_fixture
+            WHERE strftime('%Y', gametimelocal) = ? AND tipoutcome is not null
+            '''
+        stats = db_qry(DB, sql, (f"{YEAR}",))
+        db_print(stats, ["Season", "Tip Score", "No of Matches", "PCT (%)"])
+    
+    return data
 
 
-def option_two():
+def get_round(round=None, cli=False):
     # print round n
-    while True:
-        try:
-            n = int(input(f"{OKCYAN}Select Round [1-24]: {ENDC}"))
-        except:
-            continue
-        if n >= 1 and n <= 24:
-            break
+    if cli:
+        while True:
+            try:
+                round = int(input(f"{OKCYAN}Select Round [1-24]: {ENDC}"))
+            except:
+                continue
+            if round >= 1 and round <= 24:
+                break
 
-    db_print(DB, f"SELECT {PRINTABLE_COLS} FROM tbl_fixture WHERE round = {n} and strftime('%Y', gametimelocal) = '{YEAR}' AND competition = 'HA'")
+    sql = f"SELECT {PRINTABLE_COLS} FROM tbl_fixture WHERE round = ? and strftime('%Y', gametimelocal) = ?"
+    result = db_qry(DB, sql, (round, f"{YEAR}"))
+    if cli:
+        db_print(result, PRINTABLE_COLS)
+
+    return result
 
 
-def simulate(db = DB, SeasonStart = 2013):
+def simulate(db=DB, SeasonStart=2013, cli=True):
 
     for y in range(SeasonStart, YEAR):
 
@@ -563,7 +430,7 @@ def simulate(db = DB, SeasonStart = 2013):
         sql = f'''
             SELECT ID, {PRINTABLE_COLS}
             FROM tbl_fixture
-            WHERE strftime('%Y', gametimelocal) = ? AND competition = 'HA'
+            WHERE strftime('%Y', gametimelocal) = ?
         '''
         # iterate through query
         for row in db_qry(db, sql, (str(y),)):
@@ -581,30 +448,60 @@ def simulate(db = DB, SeasonStart = 2013):
             UPDATE tbl_fixture
             SET TipstersPick = :pick,
                 TipOutcome = CASE WHEN result=:pick OR result='Draw' THEN 1 ELSE 0 END
-            WHERE ID=:id AND competition='HA'
+            WHERE ID=:id
         '''
         db_qry_many(db, sql, data)
 
     # print stats
-    db_print(db, f'''
+    stats = db_qry(db, f'''
         SELECT Year as Season,
             sum(TipOutcome) as `Tip Score`,
             count(*) as `No of Matches`,
             round((sum(TipOutcome)/count(*)) * 100, 1) as `Percentage (%)`
         FROM tbl_fixture
-        WHERE competition = 'HA' AND Year < {YEAR}
+        WHERE Year < ?
         GROUP BY Year
         UNION SELECT 'Total' as Season,
             sum(TipOutcome) as `Tip Score`,
             count(*) as `No of Matches`,
             round((sum(TipOutcome)/count(*)) * 100, 1) as `Percentage (%)`
         FROM tbl_fixture
-        WHERE competition = 'HA' AND Year < {YEAR}
-    ''')
+        WHERE Year < ?
+    ''', (YEAR, YEAR))
+    if cli:
+        db_print(stats, ["Season", "Tip Score", "No of Matches", "Pct (%)"])
+
+    return stats
 
 
 if __name__ == '__main__':
-    main()
-    # db_qry(DB, "update tbl_fixture set tipoutcome = null, tipsterspick = null where year < 2023")
-    # update_csv(CSV_FILE, DB, "select * from tbl_fixture")
-    # db_print(DB, "PRAGMA table_info(tbl_fixture)")
+
+    tipster_load()
+
+    ##### USER MENU #####
+    print(f"\n{HEADER}{ASCII_ART}{ENDC}\n")
+
+    while True:
+        sel = tipster_menu()
+
+        # [MENU OPTION 1] Print current round with tipsters picks
+        if sel == MENU[0]:
+            get_current_round(cli=True)
+
+        # [MENU OPTION 2] Print selected round
+        elif sel == MENU[1]:
+            get_round(cli=True)
+
+        # [MENU OPTION 3] Simulate
+        elif sel == MENU[2]:
+            simulate(cli=True)
+
+        # [MENU OPTION 4] PRINT AFL LADDER
+        elif sel == MENU[3]:
+            get_afl_ladder(cli=True)
+
+        # [MENU OPTION EXIT]
+        if sel.lower() == "exit":
+            # write back to csv
+            update_csv("select * from tbl_fixture")
+            break

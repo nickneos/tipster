@@ -197,15 +197,6 @@ ID,Year,Competition,Round,GameTimeUTC,GameTimeLocal,HomeTeam,AwayTeam,Ground,Sco
 5065,2013,HA,23,2013-09-01 03:10:00+00:00,2013-09-01 13:10:00+10:00,Gold Coast,GWS,Gold Coast,146-63,Gold Coast,1.083,9.65,Gold Coast,1.0
 5066,2013,HA,23,2013-09-01 05:20:00+00:00,2013-09-01 15:20:00+10:00,Collingwood,North Melbourne,MCG,114-125,North Melbourne,1.598,2.51,Collingwood,0.0
 5067,2013,HA,23,2013-09-01 06:40:00+00:00,2013-09-01 16:40:00+10:00,Western Bulldogs,Melbourne,Docklands,107-87,Western Bulldogs,1.074,10.25,Western Bulldogs,1.0
-5068,2013,QF,24,2013-09-06 09:50:00+00:00,2013-09-06 19:50:00+10:00,Hawthorn,Sydney,MCG,105-51,Hawthorn,1.653,2.38,,
-5069,2013,QF,24,2013-09-07 04:20:00+00:00,2013-09-07 14:20:00+10:00,Geelong,Fremantle,Kardinia,72-87,Fremantle,1.344,3.56,,
-5070,2013,EF,24,2013-09-07 09:45:00+00:00,2013-09-07 19:45:00+10:00,Collingwood,Port Adelaide,MCG,63-87,Port Adelaide,1.211,5.02,,
-5071,2013,EF,24,2013-09-08 05:20:00+00:00,2013-09-08 15:20:00+10:00,Richmond,Carlton,MCG,96-116,Carlton,1.444,3.01,,
-5072,2013,SF,25,2013-09-13 09:50:00+00:00,2013-09-13 19:50:00+10:00,Geelong,Port Adelaide,MCG,96-80,Geelong,1.204,5.16,,
-5073,2013,SF,25,2013-09-14 09:45:00+00:00,2013-09-14 19:45:00+10:00,Sydney,Carlton,Homebush,86-62,Sydney,1.384,3.31,,
-5074,2013,PF,26,2013-09-20 09:50:00+00:00,2013-09-20 19:50:00+10:00,Hawthorn,Geelong,MCG,102-97,Hawthorn,1.392,3.27,,
-5075,2013,PF,26,2013-09-21 09:45:00+00:00,2013-09-21 19:45:00+10:00,Fremantle,Sydney,Subiaco,99-74,Fremantle,1.294,3.97,,
-5076,2013,GF,27,2013-09-27 04:40:00+00:00,2013-09-27 14:40:00+10:00,Hawthorn,Fremantle,MCG,77-62,Hawthorn,,,,
 5104,2014,HA,1,2014-03-14 08:50:00+00:00,2014-03-14 19:50:00+11:00,Collingwood,Fremantle,Docklands,46-116,Fremantle,2.6,1.561,Fremantle,1.0
 5105,2014,HA,1,2014-03-15 05:40:00+00:00,2014-03-15 16:40:00+11:00,GWS,Sydney,Showgrounds,99-67,GWS,10.25,1.074,Sydney,0.0
 5106,2014,HA,1,2014-03-15 08:55:00+00:00,2014-03-15 19:55:00+11:00,Gold Coast,Richmond,Gold Coast,87-69,Gold Coast,3.05,1.434,Richmond,0.0
@@ -404,15 +395,6 @@ ID,Year,Competition,Round,GameTimeUTC,GameTimeLocal,HomeTeam,AwayTeam,Ground,Sco
 5299,2014,HA,23,2014-08-30 09:40:00+00:00,2014-08-30 19:40:00+10:00,Geelong,Brisbane,Kardinia,143-81,Geelong,1.076,10.25,Geelong,1.0
 5300,2014,HA,23,2014-08-31 05:20:00+00:00,2014-08-31 15:20:00+10:00,Adelaide,St Kilda,Adelaide,141-62,Adelaide,1.065,11.47,Adelaide,1.0
 5301,2014,HA,23,2014-08-31 06:40:00+00:00,2014-08-31 16:40:00+10:00,Western Bulldogs,GWS,Docklands,109-115,GWS,1.25,4.46,Western Bulldogs,0.0
-5302,2014,QF,24,2014-09-05 09:50:00+00:00,2014-09-05 19:50:00+10:00,Hawthorn,Geelong,MCG,104-68,Hawthorn,1.476,2.88,,
-5303,2014,QF,24,2014-09-06 04:45:00+00:00,2014-09-06 14:45:00+10:00,Sydney,Fremantle,Homebush,93-69,Sydney,1.377,3.35,,
-5304,2014,EF,24,2014-09-06 09:15:00+00:00,2014-09-06 19:15:00+10:00,North Melbourne,Essendon,MCG,93-81,North Melbourne,1.74,2.22,,
-5305,2014,EF,24,2014-09-07 05:20:00+00:00,2014-09-07 15:20:00+10:00,Port Adelaide,Richmond,Adelaide,132-75,Port Adelaide,1.436,3.05,,
-5306,2014,SF,25,2014-09-12 09:50:00+00:00,2014-09-12 19:50:00+10:00,Geelong,North Melbourne,MCG,92-98,North Melbourne,1.757,2.2,,
-5307,2014,SF,25,2014-09-13 09:45:00+00:00,2014-09-13 19:45:00+10:00,Fremantle,Port Adelaide,Subiaco,83-105,Port Adelaide,1.636,2.42,,
-5308,2014,PF,26,2014-09-19 09:50:00+00:00,2014-09-19 19:50:00+10:00,Sydney,North Melbourne,Homebush,136-65,Sydney,1.206,5.12,,
-5309,2014,PF,26,2014-09-20 06:45:00+00:00,2014-09-20 16:45:00+10:00,Hawthorn,Port Adelaide,MCG,97-94,Hawthorn,1.338,3.6,,
-5310,2014,GF,27,2014-09-27 04:30:00+00:00,2014-09-27 14:30:00+10:00,Sydney,Hawthorn,MCG,74-137,Hawthorn,1.571,2.58,,
 5338,2015,HA,1,2015-04-02 08:20:00+00:00,2015-04-02 19:20:00+11:00,Carlton,Richmond,MCG,78-105,Richmond,2.69,1.531,Carlton,0.0
 5339,2015,HA,1,2015-04-04 02:40:00+00:00,2015-04-04 13:40:00+11:00,Melbourne,Gold Coast,MCG,115-89,Melbourne,3.35,1.377,Gold Coast,0.0
 5340,2015,HA,1,2015-04-04 05:35:00+00:00,2015-04-04 16:35:00+11:00,Sydney,Essendon,Homebush,72-60,Sydney,1.323,3.72,Sydney,1.0
@@ -611,15 +593,6 @@ ID,Year,Competition,Round,GameTimeUTC,GameTimeLocal,HomeTeam,AwayTeam,Ground,Sco
 5533,2015,HA,23,2015-09-05 09:40:00+00:00,2015-09-05 19:40:00+10:00,West Coast,St Kilda,Subiaco,125-30,West Coast,1.01,25.5,West Coast,1.0
 5534,2015,HA,23,2015-09-06 03:10:00+00:00,2015-09-06 13:10:00+10:00,Melbourne,GWS,Docklands,103-77,Melbourne,2.37,1.662,GWS,0.0
 5535,2015,HA,23,2015-09-06 05:20:00+00:00,2015-09-06 15:20:00+10:00,Collingwood,Essendon,MCG,92-95,Essendon,1.3,3.92,Collingwood,0.0
-5536,2015,QF,24,2015-09-10 14:20:00+00:00,2015-09-11 00:20:00+10:00,West Coast,Hawthorn,Subiaco,96-64,West Coast,,,,
-5537,2015,QF,24,2015-09-12 05:20:00+00:00,2015-09-12 15:20:00+10:00,Fremantle,Sydney,Subiaco,69-60,Fremantle,1.319,3.75,,
-5538,2015,EF,24,2015-09-12 09:20:00+00:00,2015-09-12 19:20:00+10:00,Western Bulldogs,Adelaide,MCG,102-109,Adelaide,1.925,1.98,,
-5539,2015,EF,24,2015-09-13 05:20:00+00:00,2015-09-13 15:20:00+10:00,Richmond,North Melbourne,MCG,88-105,North Melbourne,1.588,2.53,,
-5540,2015,SF,25,2015-09-18 09:50:00+00:00,2015-09-18 19:50:00+10:00,Hawthorn,Adelaide,MCG,135-61,Hawthorn,1.333,3.64,,
-5541,2015,SF,25,2015-09-19 09:20:00+00:00,2015-09-19 19:20:00+10:00,Sydney,North Melbourne,Homebush,51-77,North Melbourne,1.714,2.27,,
-5542,2015,PF,26,2015-09-25 10:20:00+00:00,2015-09-25 20:20:00+10:00,Fremantle,Hawthorn,Subiaco,67-94,Hawthorn,2.23,1.735,,
-5543,2015,PF,26,2015-09-26 09:45:00+00:00,2015-09-26 19:45:00+10:00,West Coast,North Melbourne,Subiaco,80-55,West Coast,1.217,4.93,,
-5544,2015,GF,27,2015-10-03 04:30:00+00:00,2015-10-03 14:30:00+10:00,Hawthorn,West Coast,MCG,107-61,Hawthorn,,,,
 5572,2016,HA,1,2016-03-24 08:20:00+00:00,2016-03-24 19:20:00+11:00,Richmond,Carlton,MCG,92-83,Richmond,1.273,4.18,Richmond,1.0
 5573,2016,HA,1,2016-03-26 02:40:00+00:00,2016-03-26 13:40:00+11:00,Melbourne,GWS,MCG,80-78,Melbourne,2.55,1.571,GWS,0.0
 5574,2016,HA,1,2016-03-26 05:35:00+00:00,2016-03-26 16:35:00+11:00,Gold Coast,Essendon,Gold Coast,121-60,Gold Coast,1.16,6.16,Gold Coast,1.0
@@ -818,46 +791,8 @@ ID,Year,Competition,Round,GameTimeUTC,GameTimeLocal,HomeTeam,AwayTeam,Ground,Sco
 5767,2016,HA,23,2016-08-28 03:10:00+00:00,2016-08-28 13:10:00+10:00,St Kilda,Brisbane,Docklands,161-103,St Kilda,1.074,10.71,St Kilda,1.0
 5768,2016,HA,23,2016-08-28 05:20:00+00:00,2016-08-28 15:20:00+10:00,Hawthorn,Collingwood,MCG,112-111,Hawthorn,1.322,3.73,Hawthorn,1.0
 5769,2016,HA,23,2016-08-28 06:40:00+00:00,2016-08-28 16:40:00+10:00,Fremantle,Western Bulldogs,Subiaco,69-49,Fremantle,3.1,1.425,Western Bulldogs,0.0
-5770,2016,EF,24,2016-09-08 10:10:00+00:00,2016-09-08 20:10:00+10:00,West Coast,Western Bulldogs,Subiaco,52-99,Western Bulldogs,1.285,4.05,,
-5771,2016,QF,24,2016-09-09 09:50:00+00:00,2016-09-09 19:50:00+10:00,Geelong,Hawthorn,MCG,85-83,Geelong,1.689,2.31,,
-5772,2016,QF,24,2016-09-10 05:20:00+00:00,2016-09-10 15:20:00+10:00,Sydney,GWS,Homebush,55-91,GWS,1.574,2.57,,
-5773,2016,EF,24,2016-09-10 09:40:00+00:00,2016-09-10 19:40:00+10:00,Adelaide,North Melbourne,Adelaide,141-79,Adelaide,1.166,5.98,,
-5774,2016,SF,25,2016-09-16 09:50:00+00:00,2016-09-16 19:50:00+10:00,Hawthorn,Western Bulldogs,MCG,84-107,Western Bulldogs,1.571,2.58,,
-5775,2016,SF,25,2016-09-17 09:25:00+00:00,2016-09-17 19:25:00+10:00,Sydney,Adelaide,SCG,118-82,Sydney,1.613,2.47,,
-5776,2016,PF,26,2016-09-23 09:50:00+00:00,2016-09-23 19:50:00+10:00,Geelong,Sydney,MCG,60-97,Sydney,1.666,2.36,,
-5777,2016,PF,26,2016-09-24 07:15:00+00:00,2016-09-24 17:15:00+10:00,GWS,Western Bulldogs,Showgrounds,83-89,Western Bulldogs,1.434,3.05,,
-5778,2016,GF,27,2016-10-01 04:30:00+00:00,2016-10-01 14:30:00+10:00,Sydney,Western Bulldogs,MCG,67-89,Western Bulldogs,1.46,2.94,,
-5779,2017,WL,1,2017-02-03 08:45:00+00:00,2017-02-03 19:45:00+11:00,Carlton,Collingwood,Princes Park,46-11,Carlton,,,,
-5780,2017,WL,1,2017-02-04 06:05:00+00:00,2017-02-04 17:05:00+11:00,GWS,Adelaide,Thebarton,Dec-48,#VALUE!,,,,
-5781,2017,WL,1,2017-02-04 08:40:00+00:00,2017-02-04 19:40:00+11:00,Western Bulldogs,Fremantle,Whitten Oval,44-12,Western Bulldogs,,,,
-5782,2017,WL,1,2017-02-05 06:05:00+00:00,2017-02-05 17:05:00+11:00,Melbourne,Brisbane,Casey,Oct-25,#VALUE!,,,,
-5783,2017,WL,2,2017-02-10 08:35:00+00:00,2017-02-10 19:35:00+11:00,Western Bulldogs,Adelaide,Whitten Oval,23-48,Adelaide,,,,
-5784,2017,WL,2,2017-02-11 06:05:00+00:00,2017-02-11 17:05:00+11:00,GWS,Carlton,Princes Park,34-47,Carlton,,,,
-5785,2017,WL,2,2017-02-11 08:40:00+00:00,2017-02-11 19:40:00+11:00,Melbourne,Collingwood,Olympic Park,44-25,Melbourne,,,,
-5786,2017,WL,2,2017-02-12 08:05:00+00:00,2017-02-12 19:05:00+11:00,Fremantle,Brisbane,Fremantle,23-36,Brisbane,,,,
-5789,2017,WL,3,2017-02-18 01:05:00+00:00,2017-02-18 12:05:00+11:00,Fremantle,GWS,Blacktown,43-43,Draw,,,,
-5791,2017,WL,3,2017-02-18 05:35:00+00:00,2017-02-18 16:35:00+11:00,Brisbane,Collingwood,South Pine,27-23,Brisbane,,,,
-5793,2017,WL,3,2017-02-18 08:40:00+00:00,2017-02-18 19:40:00+11:00,Melbourne,Western Bulldogs,Whitten Oval,43-29,Melbourne,,,,
-5794,2017,WL,3,2017-02-19 01:05:00+00:00,2017-02-19 12:05:00+11:00,Carlton,Adelaide,Thebarton,14-17,Adelaide,,,,
-5799,2017,WL,4,2017-02-25 00:35:00+00:00,2017-02-25 11:35:00+11:00,Melbourne,Carlton,Casey,42-36,Melbourne,,,,
-5801,2017,WL,4,2017-02-25 05:35:00+00:00,2017-02-25 16:35:00+11:00,Brisbane,GWS,South Pine,43-9,Brisbane,,,,
-5803,2017,WL,4,2017-02-25 08:10:00+00:00,2017-02-25 19:10:00+11:00,Western Bulldogs,Collingwood,Whitten Oval,25-32,Collingwood,,,,
-5806,2017,WL,4,2017-02-26 08:05:00+00:00,2017-02-26 19:05:00+11:00,Fremantle,Adelaide,Fremantle,23-46,Adelaide,,,,
-5808,2017,WL,5,2017-03-03 06:05:00+00:00,2017-03-03 17:05:00+11:00,Melbourne,GWS,Blacktown,15-20,GWS,,,,
-5810,2017,WL,5,2017-03-04 00:35:00+00:00,2017-03-04 11:35:00+11:00,Western Bulldogs,Carlton,Princes Park,48-54,Carlton,,,,
-5811,2017,WL,5,2017-03-04 02:35:00+00:00,2017-03-04 13:35:00+11:00,Fremantle,Collingwood,Rushton Park,31-32,Collingwood,,,,
-5814,2017,WL,5,2017-03-04 08:10:00+00:00,2017-03-04 19:10:00+11:00,Brisbane,Adelaide,Norwood,33-30,Brisbane,,,,
-5820,2017,WL,6,2017-03-10 07:05:00+00:00,2017-03-10 18:05:00+11:00,Fremantle,Carlton,Subiaco,43-27,Fremantle,,,,
-5822,2017,WL,6,2017-03-11 00:05:00+00:00,2017-03-11 11:05:00+11:00,Western Bulldogs,Brisbane,South Pine,16-23,Brisbane,,,,
-5825,2017,WL,6,2017-03-11 08:10:00+00:00,2017-03-11 19:10:00+11:00,Melbourne,Adelaide,Marrara,34-32,Melbourne,,,,
-5826,2017,WL,6,2017-03-12 00:05:00+00:00,2017-03-12 11:05:00+11:00,GWS,Collingwood,Olympic Park,19-55,Collingwood,,,,
-5830,2017,WL,7,2017-03-18 05:35:00+00:00,2017-03-18 16:35:00+11:00,Melbourne,Fremantle,Casey,70-16,Melbourne,,,,
-5831,2017,WL,7,2017-03-18 08:10:00+00:00,2017-03-18 19:10:00+11:00,Western Bulldogs,GWS,Manuka,52-20,Western Bulldogs,,,,
-5832,2017,WL,7,2017-03-19 02:35:00+00:00,2017-03-19 13:35:00+11:00,Collingwood,Adelaide,Olympic Park,46-70,Adelaide,,,,
-5833,2017,WL,7,2017-03-19 04:35:00+00:00,2017-03-19 15:35:00+11:00,Brisbane,Carlton,Princes Park,37-37,Draw,,,,
 5834,2017,HA,1,2017-03-23 08:20:00+00:00,2017-03-23 19:20:00+11:00,Carlton,Richmond,MCG,89-132,Richmond,2.93,1.454,Richmond,1.0
 5835,2017,HA,1,2017-03-24 08:50:00+00:00,2017-03-24 19:50:00+11:00,Collingwood,Western Bulldogs,MCG,86-100,Western Bulldogs,2.99,1.44,Western Bulldogs,1.0
-5836,2017,WG,8,2017-03-25 02:55:00+00:00,2017-03-25 13:55:00+11:00,Brisbane,Adelaide,Gold Coast,29-35,Adelaide,,,,
 5837,2017,HA,1,2017-03-25 05:35:00+00:00,2017-03-25 16:35:00+11:00,St Kilda,Melbourne,Docklands,90-120,Melbourne,1.625,2.42,St Kilda,0.0
 5838,2017,HA,1,2017-03-25 05:35:00+00:00,2017-03-25 16:35:00+11:00,Sydney,Port Adelaide,SCG,82-110,Port Adelaide,1.298,3.86,Sydney,0.0
 5839,2017,HA,1,2017-03-25 08:25:00+00:00,2017-03-25 19:25:00+11:00,Essendon,Hawthorn,MCG,116-91,Essendon,3.24,1.387,Hawthorn,0.0
@@ -1054,15 +989,6 @@ ID,Year,Competition,Round,GameTimeUTC,GameTimeLocal,HomeTeam,AwayTeam,Ground,Sco
 6030,2017,HA,23,2017-08-27 03:10:00+00:00,2017-08-27 13:10:00+10:00,Essendon,Fremantle,Docklands,107-92,Essendon,1.119,7.35,Essendon,1.0
 6031,2017,HA,23,2017-08-27 05:20:00+00:00,2017-08-27 15:20:00+10:00,Richmond,St Kilda,MCG,122-81,Richmond,1.543,2.62,Richmond,1.0
 6032,2017,HA,23,2017-08-27 06:40:00+00:00,2017-08-27 16:40:00+10:00,West Coast,Adelaide,Subiaco,100-71,West Coast,1.925,1.961,West Coast,1.0
-6033,2017,QF,24,2017-09-07 09:50:00+00:00,2017-09-07 19:50:00+10:00,Adelaide,GWS,Adelaide,84-48,Adelaide,1.561,2.57,,
-6034,2017,QF,24,2017-09-08 09:50:00+00:00,2017-09-08 19:50:00+10:00,Geelong,Richmond,MCG,40-91,Richmond,1.84,2.06,,
-6035,2017,EF,24,2017-09-09 06:20:00+00:00,2017-09-09 16:20:00+10:00,Sydney,Essendon,Sydney,121-56,Sydney,1.17,5.71,,
-6036,2017,EF,24,2017-09-09 09:50:00+00:00,2017-09-09 19:50:00+10:00,Port Adelaide,West Coast,Adelaide,76-78,West Coast,1.526,2.67,,
-6037,2017,SF,25,2017-09-15 09:50:00+00:00,2017-09-15 19:50:00+10:00,Geelong,Sydney,MCG,98-39,Geelong,3.14,1.406,,
-6038,2017,SF,25,2017-09-16 09:25:00+00:00,2017-09-16 19:25:00+10:00,GWS,West Coast,Showgrounds,125-58,GWS,1.45,2.94,,
-6039,2017,PF,26,2017-09-22 09:50:00+00:00,2017-09-22 19:50:00+10:00,Adelaide,Geelong,Adelaide,136-75,Adelaide,1.454,2.93,,
-6040,2017,PF,26,2017-09-23 06:45:00+00:00,2017-09-23 16:45:00+10:00,Richmond,GWS,MCG,103-67,Richmond,1.543,2.62,,
-6041,2017,GF,27,2017-09-30 04:30:00+00:00,2017-09-30 14:30:00+10:00,Adelaide,Richmond,MCG,60-108,Richmond,1.625,2.42,,
 6060,2018,HA,1,2018-03-22 08:25:00+00:00,2018-03-22 19:25:00+11:00,Richmond,Carlton,MCG,121-95,Richmond,1.204,4.81,Richmond,1.0
 6061,2018,HA,1,2018-03-23 08:50:00+00:00,2018-03-23 19:50:00+11:00,Essendon,Adelaide,Docklands,99-87,Essendon,1.854,2.0,Essendon,1.0
 6062,2018,HA,1,2018-03-24 04:35:00+00:00,2018-03-24 15:35:00+11:00,St Kilda,Brisbane,Docklands,107-82,St Kilda,1.341,3.41,St Kilda,1.0
@@ -1261,15 +1187,6 @@ ID,Year,Competition,Round,GameTimeUTC,GameTimeLocal,HomeTeam,AwayTeam,Ground,Sco
 6255,2018,HA,23,2018-08-26 03:10:00+00:00,2018-08-26 13:10:00+10:00,Brisbane,West Coast,Gabba,72-98,West Coast,2.15,1.75,Brisbane,0.0
 6256,2018,HA,23,2018-08-26 05:20:00+00:00,2018-08-26 15:20:00+10:00,Melbourne,GWS,MCG,102-57,Melbourne,1.48,2.75,Melbourne,1.0
 6257,2018,HA,23,2018-08-26 06:40:00+00:00,2018-08-26 16:40:00+10:00,St Kilda,North Melbourne,Docklands,94-117,North Melbourne,3.35,1.35,North Melbourne,1.0
-6258,2018,QF,24,2018-09-06 09:20:00+00:00,2018-09-06 19:20:00+10:00,Richmond,Hawthorn,MCG,95-64,Richmond,1.42,3.0,,
-6259,2018,EF,24,2018-09-07 09:50:00+00:00,2018-09-07 19:50:00+10:00,Melbourne,Geelong,MCG,75-46,Melbourne,1.9,1.95,,
-6260,2018,EF,24,2018-09-08 06:20:00+00:00,2018-09-08 16:20:00+10:00,Sydney,GWS,SCG,30-79,GWS,1.97,1.86,,
-6261,2018,QF,24,2018-09-08 10:10:00+00:00,2018-09-08 20:10:00+10:00,West Coast,Collingwood,Perth,86-70,West Coast,1.63,2.35,,
-6262,2018,SF,25,2018-09-14 09:50:00+00:00,2018-09-14 19:50:00+10:00,Hawthorn,Melbourne,MCG,71-104,Melbourne,3.0,1.42,,
-6263,2018,SF,25,2018-09-15 09:25:00+00:00,2018-09-15 19:25:00+10:00,Collingwood,GWS,MCG,69-59,Collingwood,1.58,2.45,,
-6264,2018,PF,26,2018-09-21 09:50:00+00:00,2018-09-21 19:50:00+10:00,Richmond,Collingwood,MCG,58-97,Collingwood,1.42,3.0,,
-6265,2018,PF,26,2018-09-22 03:20:00+00:00,2018-09-22 13:20:00+10:00,West Coast,Melbourne,Perth,121-55,West Coast,1.8,2.05,,
-6266,2018,GF,27,2018-09-29 04:30:00+00:00,2018-09-29 14:30:00+10:00,West Coast,Collingwood,MCG,79-74,West Coast,2.27,1.7,,
 6285,2019,HA,1,2019-03-21 08:25:00+00:00,2019-03-21 19:25:00+11:00,Carlton,Richmond,MCG,64-97,Richmond,7.25,1.11,Richmond,1.0
 6286,2019,HA,1,2019-03-22 08:50:00+00:00,2019-03-22 19:50:00+11:00,Collingwood,Geelong,MCG,65-72,Geelong,1.5,2.68,Collingwood,0.0
 6287,2019,HA,1,2019-03-23 02:45:00+00:00,2019-03-23 13:45:00+11:00,Melbourne,Port Adelaide,MCG,61-87,Port Adelaide,1.2,4.8,Melbourne,0.0
@@ -1468,15 +1385,6 @@ ID,Year,Competition,Round,GameTimeUTC,GameTimeLocal,HomeTeam,AwayTeam,Ground,Sco
 6480,2019,HA,23,2019-08-25 03:10:00+00:00,2019-08-25 13:10:00+10:00,Western Bulldogs,Adelaide,Ballarat,121-87,Western Bulldogs,1.35,3.35,Western Bulldogs,1.0
 6481,2019,HA,23,2019-08-25 05:20:00+00:00,2019-08-25 15:20:00+10:00,Richmond,Brisbane,MCG,82-55,Richmond,1.36,3.3,Richmond,1.0
 6482,2019,HA,23,2019-08-25 06:40:00+00:00,2019-08-25 16:40:00+10:00,Port Adelaide,Fremantle,Adelaide,110-67,Port Adelaide,1.27,4.0,Port Adelaide,1.0
-6483,2019,EF,24,2019-09-05 10:10:00+00:00,2019-09-05 20:10:00+10:00,West Coast,Essendon,Perth,116-61,West Coast,1.22,4.5,,
-6484,2019,QF,24,2019-09-06 09:50:00+00:00,2019-09-06 19:50:00+10:00,Geelong,Collingwood,MCG,51-61,Collingwood,1.72,2.18,,
-6485,2019,EF,24,2019-09-07 05:20:00+00:00,2019-09-07 15:20:00+10:00,GWS,Western Bulldogs,Showground,113-55,GWS,1.75,2.15,,
-6486,2019,QF,24,2019-09-07 09:25:00+00:00,2019-09-07 19:25:00+10:00,Brisbane,Richmond,Gabba,65-112,Richmond,2.3,1.65,,
-6487,2019,SF,25,2019-09-13 09:50:00+00:00,2019-09-13 19:50:00+10:00,Geelong,West Coast,MCG,88-68,Geelong,1.83,2.02,,
-6488,2019,SF,25,2019-09-14 09:25:00+00:00,2019-09-14 19:25:00+10:00,Brisbane,GWS,Gabba,80-83,GWS,1.7,2.22,,
-6489,2019,PF,26,2019-09-20 09:50:00+00:00,2019-09-20 19:50:00+10:00,Richmond,Geelong,MCG,85-66,Richmond,1.36,3.3,,
-6490,2019,PF,26,2019-09-21 06:35:00+00:00,2019-09-21 16:35:00+10:00,Collingwood,GWS,MCG,52-56,GWS,1.28,3.85,,
-6491,2019,GF,27,2019-09-28 04:40:00+00:00,2019-09-28 14:40:00+10:00,Richmond,GWS,MCG,114-25,Richmond,1.42,3.1,,
 6510,2020,HA,1,2020-03-19 08:40:00+00:00,2020-03-19 19:40:00+11:00,Richmond,Carlton,MCG,105-81,Richmond,1.24,4.25,Richmond,1.0
 6511,2020,HA,1,2020-03-20 08:50:00+00:00,2020-03-20 19:50:00+11:00,Western Bulldogs,Collingwood,Docklands,34-86,Collingwood,1.83,2.02,Western Bulldogs,0.0
 6512,2020,HA,1,2020-03-21 03:10:00+00:00,2020-03-21 14:10:00+11:00,Essendon,Fremantle,Docklands,63-57,Essendon,1.38,3.2,Essendon,1.0
@@ -1631,15 +1539,6 @@ ID,Year,Competition,Round,GameTimeUTC,GameTimeLocal,HomeTeam,AwayTeam,Ground,Sco
 6661,2020,HA,18,2020-09-20 05:35:00+00:00,2020-09-20 15:35:00+10:00,Sydney,Geelong,Gold Coast,63-69,Geelong,6.75,1.12,Geelong,1.0
 6662,2020,HA,18,2020-09-20 08:10:00+00:00,2020-09-20 18:10:00+10:00,Fremantle,Western Bulldogs,Cairns,44-74,Western Bulldogs,3.5,1.33,Western Bulldogs,1.0
 6663,2020,HA,18,2020-09-21 09:15:00+00:00,2020-09-21 19:15:00+10:00,Collingwood,Port Adelaide,Gabba,45-61,Port Adelaide,2.3,1.65,Port Adelaide,1.0
-6664,2020,QF,19,2020-10-01 09:40:00+00:00,2020-10-01 19:40:00+10:00,Port Adelaide,Geelong,Adelaide,58-42,Port Adelaide,1.75,2.15,,
-6665,2020,QF,19,2020-10-02 09:50:00+00:00,2020-10-02 19:50:00+10:00,Brisbane,Richmond,Gabba,69-54,Brisbane,2.1,1.77,,
-6666,2020,EF,19,2020-10-03 06:40:00+00:00,2020-10-03 16:40:00+10:00,St Kilda,Western Bulldogs,Gabba,67-64,St Kilda,2.22,1.7,,
-6667,2020,EF,19,2020-10-03 10:10:00+00:00,2020-10-03 20:10:00+10:00,West Coast,Collingwood,Perth,75-76,Collingwood,1.42,3.0,,
-6668,2020,SF,20,2020-10-09 08:50:00+00:00,2020-10-09 19:50:00+11:00,Richmond,St Kilda,Gold Coast,80-49,Richmond,1.27,4.0,,
-6669,2020,SF,20,2020-10-10 08:40:00+00:00,2020-10-10 19:40:00+11:00,Geelong,Collingwood,Gabba,100-32,Geelong,1.6,2.4,,
-6670,2020,PF,21,2020-10-16 08:50:00+00:00,2020-10-16 19:50:00+11:00,Port Adelaide,Richmond,Adelaide,40-46,Richmond,1.77,2.1,,
-6671,2020,PF,21,2020-10-17 08:40:00+00:00,2020-10-17 19:40:00+11:00,Brisbane,Geelong,Gabba,42-82,Geelong,1.87,1.97,,
-6672,2020,GF,22,2020-10-24 08:30:00+00:00,2020-10-24 19:30:00+11:00,Richmond,Geelong,Gabba,81-50,Richmond,1.9,2.0,,
 6682,2021,HA,1,2021-03-18 08:25:00+00:00,2021-03-18 19:25:00+11:00,Richmond,Carlton,MCG,105-80,Richmond,1.22,4.5,Richmond,1.0
 6683,2021,HA,1,2021-03-19 08:50:00+00:00,2021-03-19 19:50:00+11:00,Collingwood,Western Bulldogs,MCG,53-69,Western Bulldogs,2.35,1.63,Western Bulldogs,1.0
 6684,2021,HA,1,2021-03-20 02:45:00+00:00,2021-03-20 13:45:00+11:00,Melbourne,Fremantle,MCG,80-58,Melbourne,1.42,3.0,Melbourne,1.0
@@ -1838,15 +1737,6 @@ ID,Year,Competition,Round,GameTimeUTC,GameTimeLocal,HomeTeam,AwayTeam,Ground,Sco
 6877,2021,HA,23,2021-08-22 02:15:00+00:00,2021-08-22 12:15:00+10:00,St Kilda,Fremantle,Hobart,107-49,St Kilda,1.68,2.25,St Kilda,1.0
 6878,2021,HA,23,2021-08-22 05:20:00+00:00,2021-08-22 15:20:00+10:00,Essendon,Collingwood,MCG,102-64,Essendon,1.33,3.5,Essendon,1.0
 6879,2021,HA,23,2021-08-22 06:40:00+00:00,2021-08-22 16:40:00+10:00,Adelaide,North Melbourne,Adelaide,98-54,Adelaide,1.83,2.02,Adelaide,1.0
-6880,2021,QF,24,2021-08-27 09:50:00+00:00,2021-08-27 19:50:00+10:00,Port Adelaide,Geelong,Adelaide,86-43,Port Adelaide,1.7,2.22,,
-6881,2021,EF,24,2021-08-28 05:20:00+00:00,2021-08-28 15:20:00+10:00,Sydney,GWS,Launceston,73-74,GWS,1.8,2.05,,
-6882,2021,QF,24,2021-08-28 09:30:00+00:00,2021-08-28 19:30:00+10:00,Melbourne,Brisbane,Adelaide,93-60,Melbourne,1.7,2.22,,
-6883,2021,EF,24,2021-08-29 05:20:00+00:00,2021-08-29 15:20:00+10:00,Western Bulldogs,Essendon,Launceston,85-36,Western Bulldogs,1.58,2.45,,
-6884,2021,SF,25,2021-09-03 09:50:00+00:00,2021-09-03 19:50:00+10:00,Geelong,GWS,Perth,103-68,Geelong,1.33,3.5,,
-6885,2021,SF,25,2021-09-04 09:20:00+00:00,2021-09-04 19:20:00+10:00,Brisbane,Western Bulldogs,Gabba,78-79,Western Bulldogs,1.6,2.4,,
-6886,2021,PF,26,2021-09-10 09:50:00+00:00,2021-09-10 19:50:00+10:00,Melbourne,Geelong,Perth,125-42,Melbourne,1.5,2.68,,
-6887,2021,PF,26,2021-09-11 09:40:00+00:00,2021-09-11 19:40:00+10:00,Port Adelaide,Western Bulldogs,Adelaide,45-116,Western Bulldogs,1.38,3.2,,
-6888,2021,GF,27,2021-09-25 09:15:00+00:00,2021-09-25 19:15:00+10:00,Melbourne,Western Bulldogs,Perth,140-66,Melbourne,1.68,2.25,,
 6968,2022,HA,1,2022-03-16 08:10:00+00:00,2022-03-16 19:10:00+11:00,Melbourne,Western Bulldogs,MCG,97-71,Melbourne,1.68,2.25,Melbourne,1.0
 6969,2022,HA,1,2022-03-17 08:25:00+00:00,2022-03-17 19:25:00+11:00,Carlton,Richmond,MCG,101-76,Carlton,2.5,1.56,Carlton,1.0
 6970,2022,HA,1,2022-03-18 08:50:00+00:00,2022-03-18 19:50:00+11:00,St Kilda,Collingwood,Docklands,85-102,Collingwood,1.65,2.3,St Kilda,0.0
@@ -2045,15 +1935,6 @@ ID,Year,Competition,Round,GameTimeUTC,GameTimeLocal,HomeTeam,AwayTeam,Ground,Sco
 7163,2022,HA,23,2022-08-21 03:10:00+00:00,2022-08-21 13:10:00+10:00,Hawthorn,Western Bulldogs,Launceston,64-87,Western Bulldogs,3.2,1.38,Western Bulldogs,1.0
 7164,2022,HA,23,2022-08-21 05:20:00+00:00,2022-08-21 15:20:00+10:00,Carlton,Collingwood,MCG,74-75,Collingwood,2.05,1.8,Carlton,0.0
 7165,2022,HA,23,2022-08-21 06:40:00+00:00,2022-08-21 16:40:00+10:00,St Kilda,Sydney,Docklands,74-88,Sydney,4.25,1.24,Sydney,1.0
-7166,2022,EF,24,2022-09-01 09:20:00+00:00,2022-09-01 19:20:00+10:00,Brisbane,Richmond,Gabba,106-104,Brisbane,2.15,1.75,,
-7167,2022,QF,24,2022-09-02 09:50:00+00:00,2022-09-02 19:50:00+10:00,Melbourne,Sydney,MCG,69-91,Sydney,1.48,2.75,,
-7168,2022,QF,24,2022-09-03 06:35:00+00:00,2022-09-03 16:35:00+10:00,Geelong,Collingwood,MCG,78-72,Geelong,1.3,3.7,,
-7169,2022,EF,24,2022-09-03 10:10:00+00:00,2022-09-03 20:10:00+10:00,Fremantle,Western Bulldogs,Perth,73-60,Fremantle,1.56,2.5,,
-7170,2022,SF,25,2022-09-09 09:50:00+00:00,2022-09-09 19:50:00+10:00,Melbourne,Brisbane,MCG,79-92,Brisbane,1.2,4.8,,
-7171,2022,SF,25,2022-09-10 09:25:00+00:00,2022-09-10 19:25:00+10:00,Collingwood,Fremantle,MCG,79-59,Collingwood,1.52,2.62,,
-7172,2022,PF,26,2022-09-16 09:50:00+00:00,2022-09-16 19:50:00+10:00,Geelong,Brisbane,MCG,120-49,Geelong,1.28,3.85,,
-7173,2022,PF,26,2022-09-17 06:45:00+00:00,2022-09-17 16:45:00+10:00,Sydney,Collingwood,SCG,95-94,Sydney,1.42,3.0,,
-7174,2022,GF,27,2022-09-24 04:30:00+00:00,2022-09-24 14:30:00+10:00,Geelong,Sydney,MCG,133-52,Geelong,1.52,2.62,,
 7184,2023,HA,1,2023-03-16 08:20:00+00:00,2023-03-16 19:20:00+11:00,Richmond,Carlton,MCG,58-58,Draw,1.72,2.1,Carlton,1.0
 7185,2023,HA,1,2023-03-17 08:40:00+00:00,2023-03-17 19:40:00+11:00,Geelong,Collingwood,MCG,103-125,Collingwood,1.52,2.48,Geelong,0.0
 7186,2023,HA,1,2023-03-18 02:45:00+00:00,2023-03-18 13:45:00+11:00,North Melbourne,West Coast,Docklands,87-82,North Melbourne,1.88,1.92,North Melbourne,1.0
@@ -2065,31 +1946,31 @@ ID,Year,Competition,Round,GameTimeUTC,GameTimeLocal,HomeTeam,AwayTeam,Ground,Sco
 7192,2023,HA,1,2023-03-19 05:40:00+00:00,2023-03-19 16:40:00+11:00,St Kilda,Fremantle,Docklands,67-52,St Kilda,2.92,1.39,Fremantle,0.0
 7193,2023,HA,2,2023-03-23 08:20:00+00:00,2023-03-23 19:20:00+11:00,Carlton,Geelong,MCG,90-82,Carlton,2.45,1.53,Carlton,1.0
 7194,2023,HA,2,2023-03-24 08:50:00+00:00,2023-03-24 19:50:00+11:00,Brisbane,Melbourne,Gabba,93-82,Brisbane,2.1,1.72,Brisbane,1.0
-7195,2023,HA,2,2023-03-25 02:45:00+00:00,2023-03-25 13:45:00+11:00,Collingwood,Port Adelaide,MCG,,,1.51,2.5,Collingwood,
-7196,2023,HA,2,2023-03-25 05:35:00+00:00,2023-03-25 16:35:00+11:00,Adelaide,Richmond,Adelaide,,,2.37,1.56,Richmond,
-7197,2023,HA,2,2023-03-25 08:25:00+00:00,2023-03-25 19:25:00+11:00,Western Bulldogs,St Kilda,Docklands,,,1.52,2.49,Western Bulldogs,
-7198,2023,HA,2,2023-03-25 08:30:00+00:00,2023-03-25 19:30:00+11:00,Fremantle,North Melbourne,Perth,,,1.14,5.75,Fremantle,
-7199,2023,HA,2,2023-03-26 02:10:00+00:00,2023-03-26 13:10:00+11:00,Sydney,Hawthorn,SCG,,,1.06,8.5,Sydney,
-7200,2023,HA,2,2023-03-26 04:20:00+00:00,2023-03-26 15:20:00+11:00,Essendon,Gold Coast,Docklands,,,1.55,2.41,Essendon,
-7201,2023,HA,2,2023-03-26 07:20:00+00:00,2023-03-26 18:20:00+11:00,West Coast,GWS,Perth,,,2.0,1.8,West Coast,
-7202,2023,HA,3,2023-03-30 08:20:00+00:00,2023-03-30 19:20:00+11:00,Western Bulldogs,Brisbane,Docklands,,,,,,
-7203,2023,HA,3,2023-03-31 08:50:00+00:00,2023-03-31 19:50:00+11:00,Collingwood,Richmond,MCG,,,,,,
-7204,2023,HA,3,2023-04-01 02:45:00+00:00,2023-04-01 13:45:00+11:00,Hawthorn,North Melbourne,Launceston,,,,,,
-7205,2023,HA,3,2023-04-01 05:35:00+00:00,2023-04-01 16:35:00+11:00,GWS,Carlton,Showground,,,,,,
-7206,2023,HA,3,2023-04-01 08:25:00+00:00,2023-04-01 19:25:00+11:00,St Kilda,Essendon,MCG,,,,,,
-7207,2023,HA,3,2023-04-01 08:30:00+00:00,2023-04-01 19:30:00+11:00,Port Adelaide,Adelaide,Adelaide,,,,,,
-7208,2023,HA,3,2023-04-02 05:10:00+00:00,2023-04-02 15:10:00+10:00,Gold Coast,Geelong,,,,,,,
-7209,2023,HA,3,2023-04-02 06:20:00+00:00,2023-04-02 16:20:00+10:00,Melbourne,Sydney,MCG,,,,,,
-7210,2023,HA,3,2023-04-02 08:20:00+00:00,2023-04-02 18:20:00+10:00,Fremantle,West Coast,Perth,,,,,,
-7211,2023,HA,4,2023-04-06 09:35:00+00:00,2023-04-06 19:35:00+10:00,Brisbane,Collingwood,Gabba,,,,,,
-7212,2023,HA,4,2023-04-07 06:20:00+00:00,2023-04-07 16:20:00+10:00,North Melbourne,Carlton,Docklands,,,,,,
-7213,2023,HA,4,2023-04-08 03:45:00+00:00,2023-04-08 13:45:00+10:00,Adelaide,Fremantle,Adelaide,,,,,,
-7214,2023,HA,4,2023-04-08 06:35:00+00:00,2023-04-08 16:35:00+10:00,Richmond,Western Bulldogs,MCG,,,,,,
-7215,2023,HA,4,2023-04-08 09:30:00+00:00,2023-04-08 19:30:00+10:00,St Kilda,Gold Coast,Docklands,,,,,,
-7216,2023,HA,4,2023-04-08 09:30:00+00:00,2023-04-08 19:30:00+10:00,Sydney,Port Adelaide,SCG,,,,,,
-7217,2023,HA,4,2023-04-09 04:10:00+00:00,2023-04-09 14:10:00+10:00,Essendon,GWS,Docklands,,,,,,
-7218,2023,HA,4,2023-04-09 07:20:00+00:00,2023-04-09 17:20:00+10:00,West Coast,Melbourne,Perth,,,,,,
-7219,2023,HA,4,2023-04-10 05:20:00+00:00,2023-04-10 15:20:00+10:00,Geelong,Hawthorn,MCG,,,,,,
+7195,2023,HA,2,2023-03-25 02:45:00+00:00,2023-03-25 13:45:00+11:00,Collingwood,Port Adelaide,MCG,135-64,Collingwood,1.51,2.5,Collingwood,1.0
+7196,2023,HA,2,2023-03-25 05:35:00+00:00,2023-03-25 16:35:00+11:00,Adelaide,Richmond,Adelaide,76-108,Richmond,2.37,1.56,Richmond,1.0
+7197,2023,HA,2,2023-03-25 08:25:00+00:00,2023-03-25 19:25:00+11:00,Western Bulldogs,St Kilda,Docklands,41-92,St Kilda,1.49,2.57,Western Bulldogs,0.0
+7198,2023,HA,2,2023-03-25 08:30:00+00:00,2023-03-25 19:30:00+11:00,Fremantle,North Melbourne,Perth,72-73,North Melbourne,1.13,5.75,Fremantle,0.0
+7199,2023,HA,2,2023-03-26 02:10:00+00:00,2023-03-26 13:10:00+11:00,Sydney,Hawthorn,SCG,118-37,Sydney,1.06,8.5,Sydney,1.0
+7200,2023,HA,2,2023-03-26 04:20:00+00:00,2023-03-26 15:20:00+11:00,Essendon,Gold Coast,Docklands,108-80,Essendon,1.55,2.41,Essendon,1.0
+7201,2023,HA,2,2023-03-26 07:20:00+00:00,2023-03-26 18:20:00+11:00,West Coast,GWS,Perth,100-81,West Coast,2.0,1.8,West Coast,1.0
+7202,2023,HA,3,2023-03-30 08:20:00+00:00,2023-03-30 19:20:00+11:00,Western Bulldogs,Brisbane,Docklands,67-53,Western Bulldogs,2.45,1.53,Brisbane,0.0
+7203,2023,HA,3,2023-03-31 08:50:00+00:00,2023-03-31 19:50:00+11:00,Collingwood,Richmond,MCG,63-49,Collingwood,1.41,2.86,Collingwood,1.0
+7204,2023,HA,3,2023-04-01 02:45:00+00:00,2023-04-01 13:45:00+11:00,Hawthorn,North Melbourne,Launceston,80-61,Hawthorn,2.57,1.49,North Melbourne,0.0
+7205,2023,HA,3,2023-04-01 05:35:00+00:00,2023-04-01 16:35:00+11:00,GWS,Carlton,Showground,64-74,Carlton,2.46,1.53,Carlton,1.0
+7206,2023,HA,3,2023-04-01 08:25:00+00:00,2023-04-01 19:25:00+11:00,St Kilda,Essendon,MCG,92-74,St Kilda,1.72,2.1,St Kilda,1.0
+7207,2023,HA,3,2023-04-01 08:30:00+00:00,2023-04-01 19:30:00+11:00,Port Adelaide,Adelaide,Adelaide,86-117,Adelaide,1.39,2.92,Port Adelaide,0.0
+7208,2023,HA,3,2023-04-02 05:10:00+00:00,2023-04-02 15:10:00+10:00,Gold Coast,Geelong,,73-54,Gold Coast,3.11,1.37,Geelong,0.0
+7209,2023,HA,3,2023-04-02 06:20:00+00:00,2023-04-02 16:20:00+10:00,Melbourne,Sydney,MCG,134-84,Melbourne,1.77,2.1,Melbourne,1.0
+7210,2023,HA,3,2023-04-02 08:20:00+00:00,2023-04-02 18:20:00+10:00,Fremantle,West Coast,Perth,108-67,Fremantle,1.41,2.82,Fremantle,1.0
+7211,2023,HA,4,2023-04-06 09:35:00+00:00,2023-04-06 19:35:00+10:00,Brisbane,Collingwood,Gabba,,,2.0,1.84,,
+7212,2023,HA,4,2023-04-07 06:20:00+00:00,2023-04-07 16:20:00+10:00,North Melbourne,Carlton,Docklands,,,3.64,1.29,,
+7213,2023,HA,4,2023-04-08 03:45:00+00:00,2023-04-08 13:45:00+10:00,Adelaide,Fremantle,Adelaide,,,1.82,2.02,,
+7214,2023,HA,4,2023-04-08 06:35:00+00:00,2023-04-08 16:35:00+10:00,Richmond,Western Bulldogs,MCG,,,1.45,2.76,,
+7215,2023,HA,4,2023-04-08 09:30:00+00:00,2023-04-08 19:30:00+10:00,St Kilda,Gold Coast,Docklands,,,1.4,2.96,,
+7216,2023,HA,4,2023-04-08 09:30:00+00:00,2023-04-08 19:30:00+10:00,Sydney,Port Adelaide,SCG,,,1.33,3.36,,
+7217,2023,HA,4,2023-04-09 04:10:00+00:00,2023-04-09 14:10:00+10:00,Essendon,GWS,Docklands,,,1.54,2.5,,
+7218,2023,HA,4,2023-04-09 07:20:00+00:00,2023-04-09 17:20:00+10:00,West Coast,Melbourne,Perth,,,6.7,1.11,,
+7219,2023,HA,4,2023-04-10 05:20:00+00:00,2023-04-10 15:20:00+10:00,Geelong,Hawthorn,MCG,,,1.16,5.3,,
 7220,2023,HA,5,2023-04-13 09:40:00+00:00,2023-04-13 19:40:00+10:00,Adelaide,Carlton,Adelaide,,,,,,
 7221,2023,HA,5,2023-04-14 07:10:00+00:00,2023-04-14 17:10:00+10:00,Fremantle,Gold Coast,,,,,,,
 7222,2023,HA,5,2023-04-14 10:10:00+00:00,2023-04-14 20:10:00+10:00,Richmond,Sydney,Adelaide,,,,,,
