@@ -8,7 +8,7 @@ from bs4 import BeautifulSoup
 from datetime import datetime
 from helpers import (
     db_import_csv, db_qry, db_qry_many, db_print, 
-    utc_to_local, update_csv, cleaner, fix_team_name
+    utc_to_local, sql_to_csv, cleaner, fix_team_name
 )
 
 
@@ -30,7 +30,7 @@ MENU = [
     "Print Ladder",
     "Exit"
 ]
-PRINTABLE_COLS = "GameTimeLocal, Round, HomeTeam, HomeOdds, AwayTeam, AwayOdds, TipstersPick, Result, Score, TipOutcome"
+PRINTABLE_COLS = "GameTimeLocal, Round, HomeTeam, HomeOdds, AwayTeam, AwayOdds, Result, Score, TipstersPick, TipOutcome"
 
 # Colours
 HEADER = '\033[95m'
@@ -52,13 +52,14 @@ ASCII_ART = f'' \
     '         |__|       \/            \/        ' + f'\n'
 
 
-def tipster_load():
-    # if csv doesnt exist, download
-    if not os.path.exists(CSV_FILE):
-        urllib.request.urlretrieve(CSV_URL, CSV_FILE)
+def tipster_load(cli=False):
+    if cli:
+        # if csv doesnt exist, download
+        if not os.path.exists(CSV_FILE):
+            urllib.request.urlretrieve(CSV_URL, CSV_FILE)
 
-    # create/update db from csv
-    db_import_csv(DB, CSV_FILE)
+        # create/update db from csv
+        db_import_csv(DB, CSV_FILE)
 
     # add local time column based on utc column
     data = []
@@ -68,6 +69,10 @@ def tipster_load():
             "datetime": utc_to_local(row[1])
         })
     db_qry_many(DB, f"UPDATE tbl_fixture SET GameTimeLocal = :datetime WHERE ID = :id", data)
+
+    # update odds and results
+    update_odds(DB)
+    update_results(DB)
 
 
 def update_odds(db):
@@ -210,7 +215,7 @@ def update_results(db):
                     "winner": winner,
                     "home_team": home_team,
                     "away_team": away_team,
-                    "year": str(YEAR)
+                    "year": YEAR
                 }
                 matches.append(match)
 
@@ -224,7 +229,7 @@ def update_results(db):
                     WHEN tipsterspick=:winner THEN 1
                     WHEN :winner='Draw' THEN 1
                     ELSE 0 END
-            WHERE HomeTeam=:home_team AND AwayTeam=:away_team and strftime('%Y', gametimelocal)=:year
+            WHERE HomeTeam=:home_team AND AwayTeam=:away_team and Year=:year
         '''
         db_qry_many(db, sql, matches)
 
@@ -305,7 +310,7 @@ def tip_wizard(match):
         return team1
 
 
-def get_afl_ladder(db=DB, cli=False):
+def get_ladder(db=DB, cli=False):
     """ Gets AFL Ladder and updates db """
 
     url = f"https://www.footywire.com/afl/footy/ft_ladder?year={YEAR}"
@@ -326,7 +331,9 @@ def get_afl_ladder(db=DB, cli=False):
 
         ladder = db_qry(DB, f"SELECT * FROM tbl_ladder")
         if cli:
-            db_print(ladder, [])
+            db_print(ladder, ["Team", "Played", "Win", "Loss", "Draw", 
+                              "%Won", "Points", "For", "Against", "Percentage",
+                              "Movement", "Streak"])
 
         return ladder
 
@@ -335,37 +342,14 @@ def get_afl_ladder(db=DB, cli=False):
         return None
 
 
-def tipster_menu():
-    """ Prints out user menu """
-
-    # print menu
-    for i, m in enumerate(MENU):
-        print(f"{OKBLUE}[{i+1}] {m}{ENDC}")
-
-    # get user selection
-    while True:
-        try:
-            sel = int(input(f"\n{OKCYAN}Select option [1] to [{len(MENU)}]: {ENDC}"))
-        except:
-            continue
-        if sel >= 1 and sel <= len(MENU):
-            break
-
-    return MENU[sel - 1]
-
-
 def get_current_round(cli = False):
-
-    # update odds and results
-    update_odds(DB)
-    update_results(DB)
 
     # get round number that is the round in progress (or upcoming round if none in progress)
     today = datetime.today().date()
     curr_rnd =  db_qry(DB, f"SELECT MIN(round) FROM tbl_fixture WHERE gametimelocal >= ?", (today,))
 
     # # update tipster picks for current round
-    for row in db_qry(DB, f"SELECT ID, {PRINTABLE_COLS} FROM tbl_fixture WHERE round = {curr_rnd} and strftime('%Y', gametimelocal) = '{YEAR}'"):
+    for row in db_qry(DB, f"SELECT ID, {PRINTABLE_COLS} FROM tbl_fixture WHERE round = ? and Year = ?", (curr_rnd, YEAR)):
         match = {
             "Home_Team": row[3],
             "Odds_Home": row[4],
@@ -376,25 +360,18 @@ def get_current_round(cli = False):
         db_qry(DB, f"UPDATE tbl_fixture SET TipstersPick = ? WHERE ID = ?", (pick, row[0]))
 
     #  update csv
-    update_csv("select * from tbl_fixture")
+    sql_to_csv("select * from tbl_fixture")
     
-    sql = f"SELECT {PRINTABLE_COLS} FROM tbl_fixture WHERE round = ? and strftime('%Y', gametimelocal) = ?"
-    data = db_qry(DB, sql, (curr_rnd, f"{YEAR}"))
+    # get this round data
+    sql = f"SELECT {PRINTABLE_COLS} FROM tbl_fixture WHERE round = ? and Year = ?"
+    data = db_qry(DB, sql, (curr_rnd, YEAR))
 
     # print current round
     if cli:
         db_print(data, PRINTABLE_COLS)
 
         # print stats
-        sql = f'''
-            SELECT Year as Season,
-                sum(TipOutcome) as `Tip Score`,
-                count(*) as `No of Matches`,
-                round((sum(TipOutcome)/count(*)) * 100, 1) as `Percentage (%)`
-            FROM tbl_fixture
-            WHERE strftime('%Y', gametimelocal) = ? AND tipoutcome is not null
-            '''
-        stats = db_qry(DB, sql, (f"{YEAR}",))
+        stats = get_stats()
         db_print(stats, ["Season", "Tip Score", "No of Matches", "PCT (%)"])
     
     return data
@@ -411,15 +388,41 @@ def get_round(round=None, cli=False):
             if round >= 1 and round <= 24:
                 break
 
-    sql = f"SELECT {PRINTABLE_COLS} FROM tbl_fixture WHERE round = ? and strftime('%Y', gametimelocal) = ?"
-    result = db_qry(DB, sql, (round, f"{YEAR}"))
+    sql = f"SELECT {PRINTABLE_COLS} FROM tbl_fixture WHERE round = ? and Year = ?"
+    result = db_qry(DB, sql, (round, YEAR))
     if cli:
         db_print(result, PRINTABLE_COLS)
 
     return result
 
 
-def simulate(db=DB, SeasonStart=2013, cli=True):
+def get_season(season=YEAR, cli=False):
+
+    sql = f"SELECT {PRINTABLE_COLS} FROM tbl_fixture WHERE Year = ?"
+    result = db_qry(DB, sql, (season, ))
+    if cli:
+        db_print(result, PRINTABLE_COLS)
+
+    return result
+
+
+def get_stats(year=YEAR):
+
+    sql = f'''
+        SELECT Year as Season,
+            sum(TipOutcome) as `Tip Score`,
+            count(*) as `No of Matches`,
+            round((sum(TipOutcome)/count(*)) * 100, 1) as `Percentage (%)`
+        FROM tbl_fixture
+        WHERE Year = ? AND tipoutcome is not null
+        '''
+    try:
+        return db_qry(DB, sql, (year,))
+    except:
+        return None    
+
+
+def get_history(db=DB, SeasonStart=2013, cli=False):
 
     for y in range(SeasonStart, YEAR):
 
@@ -430,10 +433,10 @@ def simulate(db=DB, SeasonStart=2013, cli=True):
         sql = f'''
             SELECT ID, {PRINTABLE_COLS}
             FROM tbl_fixture
-            WHERE strftime('%Y', gametimelocal) = ?
+            WHERE Year = ?
         '''
         # iterate through query
-        for row in db_qry(db, sql, (str(y),)):
+        for row in db_qry(db, sql, (y,)):
             match = {
                 "Home_Team": row[3],
                 "Odds_Home": row[4],
@@ -474,15 +477,34 @@ def simulate(db=DB, SeasonStart=2013, cli=True):
     return stats
 
 
+def tipster_cli():
+    """ Prints out user menu """
+
+    # print menu
+    for i, m in enumerate(MENU):
+        print(f"{OKBLUE}[{i+1}] {m}{ENDC}")
+
+    # get user selection
+    while True:
+        try:
+            sel = int(input(f"\n{OKCYAN}Select option [1] to [{len(MENU)}]: {ENDC}"))
+        except:
+            continue
+        if sel >= 1 and sel <= len(MENU):
+            break
+
+    return MENU[sel - 1]
+
+
 if __name__ == '__main__':
 
-    tipster_load()
+    tipster_load(cli=True)
 
     ##### USER MENU #####
     print(f"\n{HEADER}{ASCII_ART}{ENDC}\n")
 
     while True:
-        sel = tipster_menu()
+        sel = tipster_cli()
 
         # [MENU OPTION 1] Print current round with tipsters picks
         if sel == MENU[0]:
@@ -494,14 +516,14 @@ if __name__ == '__main__':
 
         # [MENU OPTION 3] Simulate
         elif sel == MENU[2]:
-            simulate(cli=True)
+            get_history(cli=True)
 
         # [MENU OPTION 4] PRINT AFL LADDER
         elif sel == MENU[3]:
-            get_afl_ladder(cli=True)
+            get_ladder(cli=True)
 
         # [MENU OPTION EXIT]
         if sel.lower() == "exit":
             # write back to csv
-            update_csv("select * from tbl_fixture")
+            sql_to_csv("select * from tbl_fixture")
             break

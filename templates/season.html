@@ -1,0 +1,140 @@
+{% extends "layout.html" %}
+
+
+{% block title %}
+    Season {{ year }}
+{% endblock %}
+
+
+{% block round_dropdown %}
+    {% for r in rounds %}
+        {% if r == round %}
+            <li><a class="dropdown-item active" href="/round?r={{ r }}">Round {{ r }}</a></li>
+        {% else %}
+            <li><a class="dropdown-item" href="/round?r={{ r }}">Round {{ r }}</a></li>
+        {% endif %}
+    {% endfor %}
+{% endblock %}
+
+
+{% block year_dropdown %}
+    {% for s in seasons %}
+        {% if s == year %}
+            <li><a class="dropdown-item active" href="/season?y={{ s }}">{{ s }}</a></li>
+        {% else %}
+            <li><a class="dropdown-item" href="/season?y={{ s }}">{{ s }}</a></li>
+        {% endif %}
+    {% endfor %}
+{% endblock %}
+
+
+{% block main %}
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+
+    <h1 class="h2">AFL Season {{ year }}</h1>
+
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group me-2">
+            <a class="btn btn-sm btn-outline-secondary" href="javascript:history.back()">
+                <span data-feather="arrow-left-circle" class="align-text-bottom"></span>
+            </a>
+        </div>
+        <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <span data-feather="calendar" class="align-text-bottom"></span>
+            Season
+        </button>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/season">Current Season</a></li>
+            <li><hr class="dropdown-divider"></li>
+            {% for s in seasons %}
+                {% if s == year %}
+                    <li><a class="dropdown-item active" href="/season?y={{ s }}">{{ s }}</a></li>
+                {% else %}
+                    <li><a class="dropdown-item" href="/season?y={{ s }}">{{ s }}</a></li>
+                {% endif %}
+            {% endfor %}        
+        </ul>
+    </div>    
+</div>
+
+<h5 class="text-start">
+    Tipping Performance for {{ year }}
+</h5>
+<div class="text-start fs-6 text">
+    <span data-feather="bar-chart-2" class="align-text-middle"></span>
+    {{ stats[1] | int }} out of {{ stats[2] | int }}
+</div>
+<div class="text-start fs-6 text">
+    <span data-feather="pie-chart" class="align-text-middle"></span>
+    {{ stats[3] }}%
+</div>
+
+{% set ns = namespace(round=0) %}
+{% for row in data %}
+    {% if ns.round != row[1] %}
+        {% if ns.round != 0 %}
+                    <tfoot>
+                        <tr>
+                        {% if ns.matches > 0 %}
+                            <td class="fw-bold text-end" colspan="3">TOTAL</td>
+                            <td class="w-bold text-start">{{ ns.tips }} / {{ ns.matches }}</td>
+                        {% endif %}
+                        </tr>
+                    </tfoot>
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+        {% set ns.round = row[1] %}
+        {% set ns.tips = 0 %}
+        {% set ns.matches = 0 %}
+        <br>
+        <h5 class="text-start">Round {{ row[1] }}</h5>
+
+        <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="text-end">Date</th>
+                    <th class="text-center">Match</th>
+                    <th class="text-center">Score</th>
+                    <th class="text-start">Tipster</th>
+                </tr>
+            </thead>
+            <tbody>
+    {% endif %}
+        <tr>
+            <td class="text-end">
+                {{ row[0] | pretty_date }}
+            </td>
+            <td class="text-center">
+                <span class="fw-light">{% if row[3] is not none %} ({{ row[3] | pretty_odds }}) {% endif %}</span>
+                <span class="fs-6 text {% if row[2] == row[6] %}text-success fw-semibold{% elif row[4] == row[6] %}text-danger{% endif %}">
+                {{ row[2] }}</span> vs 
+                <span class="fs-6 text {% if row[4] == row[6] %}text-success fw-semibold{% elif row[2] == row[6] %}text-danger{% endif %}">
+                {{ row[4] }}</span>
+                <span class="fw-light">{% if row[5] is not none %} ({{ row[5] | pretty_odds }}) {% endif %}</span>
+            </td>
+            <td class="text-center">
+                {{ row[7] | pretty_none }}
+            </td>
+            <td class="text-start">
+                {% if row[9] == 1 %}
+                    {% set ns.tips = ns.tips + 1 %}
+                    {% set ns.matches = ns.matches + 1 %}
+                    <span class="text-success">&#x2705; {{ row[8] }}</span>
+                {% elif row[9] == 0 %}
+                    {% set ns.matches = ns.matches + 1 %}
+                    <span class="text-danger">&#x274C; {{ row[8] }}</span>
+                {% else %}
+                    {{ row[8] | pretty_none }}
+                {% endif %}
+            </td>
+        </tr>
+{% endfor %}
+
+        </tbody>
+    </table>
+</div>
+{% endblock %}

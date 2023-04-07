@@ -1,4 +1,6 @@
 beautifulsoup4
 Flask
+gunicorn
 lxml
 pandas
+wheel

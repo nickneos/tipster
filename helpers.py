@@ -63,6 +63,14 @@ def db_qry(db, sql, param=None):
                 return result[0][0]
             else:
                 return result[0]
+        elif len(result) > 1:
+            if len(result[0]) == 1:
+                tmp = []
+                for x in result:
+                    tmp.append(x[0])
+                return tmp
+            else:
+                return result
         else:
             return result
 
@@ -106,12 +114,12 @@ def db_print(data, columns):
     print(f"\n{df.to_string(index=False)}\n")
 
 
-def update_csv(sql, csv=CSV_FILE, db=DB):
-    """ Update csv from sqlite3 table """
+def sql_to_csv(sql_qry, csv=CSV_FILE, db=DB):
+    """ Create csv from sqlite3 query """
 
     try:
         conn = sqlite3.connect(db)
-        df = pd.read_sql_query(sql, conn)
+        df = pd.read_sql_query(sql_qry, conn)
         df.to_csv(csv, index=False)
         conn.close
 
