@@ -1,11 +1,6 @@
 {% extends "layout.html" %}
 
 
-{% block title %}
-    Round {{ round }}
-{% endblock %}
-
-
 {% block round_dropdown %}
     {% for r in rounds %}
         {% if r == round %}
@@ -30,38 +25,49 @@
 
 {% block main %}
 
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    
-    <h1 class="h2">AFL Season {{ year }} </h1>
+<h1 class="text-body-emphasis">AFL Season {{ year }} </h1>
+<div class="fs-5 col-md-8">
+    <a class="btn btn-sm btn-outline-secondary" href="javascript:history.back()">
+        <span data-feather="arrow-left-circle" class="align-text-bottom"></span>
+    </a>
 
-    <div class="btn-toolbar mb-2 mb-md-0">
-        <div class="btn-group me-2">
-            <a class="btn btn-sm btn-outline-secondary" href="javascript:history.back()">
-                <span data-feather="arrow-left-circle" class="align-text-bottom"></span>
-            </a>
-        </div>
-        <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            <span data-feather="calendar" class="align-text-bottom"></span>
-            Round
-        </button>
-        <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/">Current Round</a></li>
-            <li><a class="dropdown-item" href="/season">Entire Season</a></li>
-            <li><hr class="dropdown-divider"></li>
-            {% for r in rounds %}
-                {% if r == round %}
-                    <li><a class="dropdown-item active" href="/round?r={{ r }}">Round {{ r }}</a></li>
-                {% else %}
-                    <li><a class="dropdown-item" href="/round?r={{ r }}">Round {{ r }}</a></li>
-                {% endif %}
-            {% endfor %}            
-        </ul>
-    </div>
+    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+        <span data-feather="calendar" class="align-text-bottom"></span>
+        Round
+    </button>
+    <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="/">Current Round</a></li>
+        <li><a class="dropdown-item" href="/season">Entire Season</a></li>
+        <li><hr class="dropdown-divider"></li>
+        {% for r in rounds %}
+            {% if r == round %}
+                <li><a class="dropdown-item active" href="/round?r={{ r }}">Round {{ r }}</a></li>
+            {% else %}
+                <li><a class="dropdown-item" href="/round?r={{ r }}">Round {{ r }}</a></li>
+            {% endif %}
+        {% endfor %}            
+    </ul>
+
+    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+        <span data-feather="calendar" class="align-text-bottom"></span>
+        Season
+    </button>
+    <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="/season">Current Season</a></li>
+        <li><hr class="dropdown-divider"></li>
+        {% for s in seasons %}
+            {% if s == year %}
+                <li><a class="dropdown-item active" href="/season?y={{ s }}">{{ s }}</a></li>
+            {% else %}
+                <li><a class="dropdown-item" href="/season?y={{ s }}">{{ s }}</a></li>
+            {% endif %}
+        {% endfor %}        
+    </ul>
 
 </div>
 
 <br>
-<h5 class="text-start">Round {{ round}}</h5>
+<h5 class=>Round {{ round }}</h5>
 <div class="table-responsive">
     <table class="table table-striped">
         <thead>
@@ -114,31 +120,49 @@
     </table>
 </div>
 
-<div class="col-6">
-    <h5 class="text-center">
-        Tipping Performance for {{ year }}
-    </h5>
-    <div class="text-center fs-6 text">
-        <span data-feather="bar-chart-2" class="align-text-middle"></span>
-        {{ stats[1] | int }} out of {{ stats[2] | int }}
-    </div>
-    <div class="text-center fs-6 text">
-        <span data-feather="pie-chart" class="align-text-middle"></span>
-        {{ stats[3] }}%
-    </div>
-    <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+
+
+{# <hr class="col-3 col-md-2 mb-5"> #}
+
+<div class="row g-5">
+      <div class="col-md-6">
+        <h4 class="text-center">Season {{ year }}</h4>
+        <div class="text-center fs-6 text">
+            <span data-feather="bar-chart-2" class="align-text-middle"></span>
+            {{ stats[1] | int }} out of {{ stats[2] | int }}
+        </div>
+        <div class="text-center fs-6 text">
+            <span data-feather="pie-chart" class="align-text-middle"></span>
+            {{ stats[3] }}%
+        </div>
+        <canvas class="my-4 w-100" id="myChart1" width="900" height="380"></canvas>
+      </div>
+
+
+      <div class="col-md-6">
+        <h4 class="text-center">Round {{ round }}</h4>
+        <div class="text-center fs-6 text">
+            <span data-feather="bar-chart-2" class="align-text-middle"></span>
+            {{ ns.tips }} out of {{ ns.matches }}
+        </div>
+        <div class="text-center fs-6 text">
+            <span data-feather="pie-chart" class="align-text-middle"></span>
+            {{ '%0.1f' % ((ns.tips / ns.matches) * 100) | float }}%
+        </div>
+        <canvas class="my-4 w-100" id="myChart2" width="900" height="380"></canvas>
+      </div>
+
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
 <script>
-    const ctx = document.getElementById('myChart')
-    // eslint-disable-next-line no-unused-vars
-    const myChart = new Chart(ctx, {
-      type: 'doughnut',
-      data: {
+    const ctx1 = document.getElementById('myChart1')
+    const ctx2 = document.getElementById('myChart2')
+
+    var data1 = {
         labels: ['Tipped correctly','Tipped incorrectly'],
         datasets: [{
-            label: 'My First Dataset',
+            label: 'Season',
             data: {% set x = stats[2]-stats[1] %} [{{ stats[1] | int }},{{ x | int }}],
             backgroundColor: [
             'rgb(54, 162, 235)',
@@ -146,10 +170,22 @@
             ],
             hoverOffset: 4
         }]
-      },
-      options: {
-        legend: {display: false}
       }
-    })
+    var data2 = {
+        labels: ['Tipped correctly','Tipped incorrectly'],
+        datasets: [{
+            label: 'Round',
+            data: [{{ ns.tips }},{{ ns.matches - ns.tips }}],
+            backgroundColor: [
+            'rgb(54, 162, 235)',
+            'rgb(255, 99, 132)'
+            ],
+            hoverOffset: 4
+        }]
+      }
+    
+    const myChart1 = new Chart(ctx1, {type: 'doughnut', data: data1, options: {legend: {display: false} } })
+    const myChart2 = new Chart(ctx2, {type: 'doughnut', data: data2, options: {legend: {display: false} } })
 </script>
+
 {% endblock %}
