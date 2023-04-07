@@ -1963,13 +1963,13 @@ ID,Year,Competition,Round,GameTimeUTC,GameTimeLocal,HomeTeam,AwayTeam,Ground,Sco
 7209,2023,HA,3,2023-04-02 06:20:00+00:00,2023-04-02 16:20:00+10:00,Melbourne,Sydney,MCG,134-84,Melbourne,1.77,2.1,Melbourne,1.0
 7210,2023,HA,3,2023-04-02 08:20:00+00:00,2023-04-02 18:20:00+10:00,Fremantle,West Coast,Perth,108-67,Fremantle,1.41,2.82,Fremantle,1.0
 7211,2023,HA,4,2023-04-06 09:35:00+00:00,2023-04-06 19:35:00+10:00,Brisbane,Collingwood,Gabba,116-83,Brisbane,2.0,1.8,Brisbane,1.0
-7212,2023,HA,4,2023-04-07 06:20:00+00:00,2023-04-07 16:20:00+10:00,North Melbourne,Carlton,Docklands,,,4.7,1.18,Carlton,
+7212,2023,HA,4,2023-04-07 06:20:00+00:00,2023-04-07 16:20:00+10:00,North Melbourne,Carlton,Docklands,84-107,Carlton,4.4,1.2,Carlton,1.0
 7213,2023,HA,4,2023-04-08 03:45:00+00:00,2023-04-08 13:45:00+10:00,Adelaide,Fremantle,Adelaide,,,1.72,2.1,Adelaide,
 7214,2023,HA,4,2023-04-08 06:35:00+00:00,2023-04-08 16:35:00+10:00,Richmond,Western Bulldogs,MCG,,,1.48,2.61,Richmond,
 7215,2023,HA,4,2023-04-08 09:30:00+00:00,2023-04-08 19:30:00+10:00,St Kilda,Gold Coast,Docklands,,,1.52,2.49,St Kilda,
-7216,2023,HA,4,2023-04-08 09:30:00+00:00,2023-04-08 19:30:00+10:00,Sydney,Port Adelaide,SCG,,,1.29,3.5,Sydney,
-7217,2023,HA,4,2023-04-09 04:10:00+00:00,2023-04-09 14:10:00+10:00,Essendon,GWS,Docklands,,,1.48,2.67,Essendon,
-7218,2023,HA,4,2023-04-09 07:20:00+00:00,2023-04-09 17:20:00+10:00,West Coast,Melbourne,Perth,,,9.5,1.06,Melbourne,
+7216,2023,HA,4,2023-04-08 09:30:00+00:00,2023-04-08 19:30:00+10:00,Sydney,Port Adelaide,SCG,,,1.31,3.35,Sydney,
+7217,2023,HA,4,2023-04-09 04:10:00+00:00,2023-04-09 14:10:00+10:00,Essendon,GWS,Docklands,,,1.46,2.65,Essendon,
+7218,2023,HA,4,2023-04-09 07:20:00+00:00,2023-04-09 17:20:00+10:00,West Coast,Melbourne,Perth,,,9.5,1.05,Melbourne,
 7219,2023,HA,4,2023-04-10 05:20:00+00:00,2023-04-10 15:20:00+10:00,Geelong,Hawthorn,MCG,,,1.19,4.75,Geelong,
 7220,2023,HA,5,2023-04-13 09:40:00+00:00,2023-04-13 19:40:00+10:00,Adelaide,Carlton,Adelaide,,,,,,
 7221,2023,HA,5,2023-04-14 07:10:00+00:00,2023-04-14 17:10:00+10:00,Fremantle,Gold Coast,,,,,,,

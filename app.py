@@ -18,64 +18,47 @@ def index():
     '''TODO'''
 
     data = tipster.get_current_round()
-    stats = tipster.get_stats()
     round = data[0][1]
+    season = year
+    stats = []
+    stats.append(tipster.get_stats(season))
+    stats.append(tipster.get_stats(season, round))
+
     return render_template(
         template_name_or_list="index.html",
         data=data,
         rounds=rounds,
         round=round,
-        year=year,
+        season=season,
         seasons=seasons,
         stats=stats
     )
 
 
-@app.route("/round")
-def round():
+@app.route("/search")
+def search():
     '''TODO'''
 
-    round = int(request.args.get("r"))
+    round = int(request.args.get("r", 0))
+    season = int(request.args.get("y", year))
 
+    if season == 0:
+        season = year
+
+    data = tipster.get_matches(season, round)
+    stats = []
+    stats.append(tipster.get_stats(season))
     if round > 0:
-        data = tipster.get_round(round)
-        stats = tipster.get_stats()
-        return render_template(
-            template_name_or_list="index.html",
-            data=data,
-            rounds=rounds,
-            round=round,
-            year=year,
-            seasons=seasons,
-            stats=stats
-        )
-    else:
-        return redirect("/season")
-
-
-@app.route("/season")
-def season():
-    '''TODO'''
-
-    try:
-        season = int(request.args.get("y"))
-    except TypeError:
-        season = year
-
-    if season not in seasons:
-        season = year
-        
-    data = tipster.get_season(season)
-    stats = tipster.get_stats(season)
+        stats.append(tipster.get_stats(season, round))
     
     return render_template(
-        template_name_or_list="season.html",
+        template_name_or_list="index.html",
         data=data,
         rounds=rounds,
-         round=0,
-         year=season,
-         seasons=seasons,
-         stats=stats
+        round=round,
+        season=season,
+        seasons=seasons,
+        stats=stats
     )
 
 

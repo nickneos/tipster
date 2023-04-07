@@ -377,8 +377,9 @@ def get_current_round(cli = False):
     return data
 
 
-def get_round(round=None, cli=False):
-    # print round n
+def get_matches(year=YEAR, round=0, cli=False):
+    
+    # prompt for round if using CLI
     if cli:
         while True:
             try:
@@ -387,43 +388,45 @@ def get_round(round=None, cli=False):
                 continue
             if round >= 1 and round <= 24:
                 break
+    
+    if round == 0:
+        sql = f"SELECT {PRINTABLE_COLS} FROM tbl_fixture WHERE Year = ?"
+        result = db_qry(DB, sql, (year,))
+    else:
+        sql = f"SELECT {PRINTABLE_COLS} FROM tbl_fixture WHERE round = ? and Year = ?"
+        result = db_qry(DB, sql, (round, year))
 
-    sql = f"SELECT {PRINTABLE_COLS} FROM tbl_fixture WHERE round = ? and Year = ?"
-    result = db_qry(DB, sql, (round, YEAR))
     if cli:
         db_print(result, PRINTABLE_COLS)
 
     return result
 
 
-def get_season(season=YEAR, cli=False):
+def get_stats(year=YEAR, round=0):
 
-    sql = f"SELECT {PRINTABLE_COLS} FROM tbl_fixture WHERE Year = ?"
-    result = db_qry(DB, sql, (season, ))
-    if cli:
-        db_print(result, PRINTABLE_COLS)
-
-    return result
-
-
-def get_stats(year=YEAR):
-
+    param = (year,)
     sql = f'''
         SELECT Year as Season,
             sum(TipOutcome) as `Tip Score`,
             count(*) as `No of Matches`,
             round((sum(TipOutcome)/count(*)) * 100, 1) as `Percentage (%)`
         FROM tbl_fixture
-        WHERE Year = ? AND tipoutcome is not null
+        WHERE tipoutcome is not null
+            AND Year = ? 
         '''
+    if round > 0:
+        sql += " AND Round = ?"
+        param = (year, round)
+
     try:
-        return db_qry(DB, sql, (year,))
+        return db_qry(DB, sql, param)
     except:
         return None    
 
 
 def get_history(db=DB, SeasonStart=2013, cli=False):
 
+    # iterate through every year/season in data
     for y in range(SeasonStart, YEAR):
 
         # for storing picks
@@ -435,7 +438,7 @@ def get_history(db=DB, SeasonStart=2013, cli=False):
             FROM tbl_fixture
             WHERE Year = ?
         '''
-        # iterate through query
+        # iterate through matches in season
         for row in db_qry(db, sql, (y,)):
             match = {
                 "Home_Team": row[3],
@@ -443,6 +446,7 @@ def get_history(db=DB, SeasonStart=2013, cli=False):
                 "Away_Team": row[5],
                 "Odds_Away": row[6]
             }
+            # get tipsters pick
             pick = (tip_wizard(match))
             data.append({"pick": pick, "id": row[0]})
 
@@ -455,7 +459,7 @@ def get_history(db=DB, SeasonStart=2013, cli=False):
         '''
         db_qry_many(db, sql, data)
 
-    # print stats
+    # get stats
     stats = db_qry(db, f'''
         SELECT Year as Season,
             sum(TipOutcome) as `Tip Score`,
@@ -512,7 +516,7 @@ if __name__ == '__main__':
 
         # [MENU OPTION 2] Print selected round
         elif sel == MENU[1]:
-            get_round(cli=True)
+            get_matches(cli=True)
 
         # [MENU OPTION 3] Simulate
         elif sel == MENU[2]:

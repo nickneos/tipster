@@ -1,35 +1,30 @@
 {% extends "layout.html" %}
 
 
-{% block round_dropdown %}
-    {% for r in rounds %}
-        {% if r == round %}
-            <li><a class="dropdown-item active" href="/round?r={{ r }}">Round {{ r }}</a></li>
-        {% else %}
-            <li><a class="dropdown-item" href="/round?r={{ r }}">Round {{ r }}</a></li>
-        {% endif %}
-    {% endfor %}
-{% endblock %}
-
-
-{% block year_dropdown %}
-    {% for s in seasons %}
-        {% if s == year %}
-            <li><a class="dropdown-item active" href="/season?y={{ s }}">{{ s }}</a></li>
-        {% else %}
-            <li><a class="dropdown-item" href="/season?y={{ s }}">{{ s }}</a></li>
-        {% endif %}
-    {% endfor %}
-{% endblock %}
-
-
 {% block main %}
 
-<h1 class="text-body-emphasis">AFL Season {{ year }} </h1>
-<div class="fs-5 col-md-8">
+<h1 class="text-body-emphasis">AFL Season {{ season }} </h1>
+<br>
+<div class="text-start">
     <a class="btn btn-sm btn-outline-secondary" href="javascript:history.back()">
         <span data-feather="arrow-left-circle" class="align-text-bottom"></span>
     </a>
+
+    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+        <span data-feather="calendar" class="align-text-bottom"></span>
+        Season
+    </button>
+    <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="/search?r=0">Current Season</a></li>
+        <li><hr class="dropdown-divider"></li>
+        {% for s in seasons %}
+            {% if s == season %}
+                <li><a class="dropdown-item active" href="/search?y={{ s }}&r=0">{{ s }}</a></li>
+            {% else %}
+                <li><a class="dropdown-item" href="/search?y={{ s }}&r=0">{{ s }}</a></li>
+            {% endif %}
+        {% endfor %}        
+    </ul>
 
     <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
         <span data-feather="calendar" class="align-text-bottom"></span>
@@ -37,122 +32,134 @@
     </button>
     <ul class="dropdown-menu">
         <li><a class="dropdown-item" href="/">Current Round</a></li>
-        <li><a class="dropdown-item" href="/season">Entire Season</a></li>
         <li><hr class="dropdown-divider"></li>
         {% for r in rounds %}
             {% if r == round %}
-                <li><a class="dropdown-item active" href="/round?r={{ r }}">Round {{ r }}</a></li>
+                <li><a class="dropdown-item active" href="/search?y={{ season }}&r={{ r }}">Round {{ r }}</a></li>
             {% else %}
-                <li><a class="dropdown-item" href="/round?r={{ r }}">Round {{ r }}</a></li>
+                <li><a class="dropdown-item" href="/search?y={{ season }}&r={{ r }}">Round {{ r }}</a></li>
             {% endif %}
         {% endfor %}            
     </ul>
-
-    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-        <span data-feather="calendar" class="align-text-bottom"></span>
-        Season
-    </button>
-    <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="/season">Current Season</a></li>
-        <li><hr class="dropdown-divider"></li>
-        {% for s in seasons %}
-            {% if s == year %}
-                <li><a class="dropdown-item active" href="/season?y={{ s }}">{{ s }}</a></li>
-            {% else %}
-                <li><a class="dropdown-item" href="/season?y={{ s }}">{{ s }}</a></li>
-            {% endif %}
-        {% endfor %}        
-    </ul>
-
+    
 </div>
 
-<br>
-<h5 class=>Round {{ round }}</h5>
-<div class="table-responsive">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th class="text-end">Date</th>
-                <th class="text-center">Match</th>
-                <th class="text-center">Score</th>
-                <th class="text-start">Tipster</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% set ns = namespace(tips=0, matches=0) %}
-        {% for row in data %}
-            <tr>
-                <td class="text-end">
-                    {{ row[0] | pretty_date }}
-                </td>
-                <td class="text-center">
-                    <span class="fw-light">{% if row[3] is not none %} ({{ row[3] | pretty_odds }}) {% endif %}</span>
-                    <span class="fs-6 text {% if row[2] == row[6] %}text-success fw-semibold{% elif row[4] == row[6] %}text-danger{% endif %}">
-                    {{ row[2] }}</span> vs 
-                    <span class="fs-6 text {% if row[4] == row[6] %}text-success fw-semibold{% elif row[2] == row[6] %}text-danger{% endif %}">
-                    {{ row[4] }}</span>
-                    <span class="fw-light">{% if row[5] is not none %} ({{ row[5] | pretty_odds }}) {% endif %}</span>
-                </td>
-                <td class="text-center">
-                    {{ row[7] | pretty_none }}
-                </td>
-                <td class="text-start">
-                    {% if row[9] == 1 %}
-                        {% set ns.tips = ns.tips + 1 %}
-                        {% set ns.matches = ns.matches + 1 %}
-                        <span class="text-success">&#x2705; {{ row[8] }}</span>
-                    {% elif row[9] == 0 %}
-                        {% set ns.matches = ns.matches + 1 %}
-                        <span class="text-danger">&#x274C; {{ row[8] }}</span>
-                    {% else %}
-                        {{ row[8] | pretty_none }}
-                    {% endif %}
-                </td>
-            </tr>
-        {% endfor %}
+
+{% set ns = namespace(round=0) %}
+{% for row in data %}
+    {% if ns.round != row[1] %}
+
+        {##### End of Table #####}
+        {% if ns.round != 0 %}
+            {% if ns.matches > 0 %}
+                <tfoot><tr>
+                    <td class="fw-bold text-end" colspan="3">TOTAL</td>
+                    <td class="w-bold text-start">{{ ns.tips }} / {{ ns.matches }}</td>
+                </tr></tfoot>
+            {% endif %}
+            </tbody></table></div>
+        {% endif %}
+
+        {##### Start of Table #####}
+        {% set ns.round = row[1] %}
+        {% set ns.tips = 0 %}
+        {% set ns.matches = 0 %}
+        <br>
+        <h5 class="text-start text-body-emphasis">Round {{ row[1] }}</h5>
+
+        <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th class="text-end">Date</th>
+                    <th class="text-center">Match</th>
+                    <th class="text-center">Score</th>
+                    <th class="text-start">Tipster</th>
+                </tr>
+            </thead>
+            <tbody>
+    {% endif %}
+
+        {##### Table Data #####}
+        <tr>
+            <td class="text-end">
+                {{ row[0] | pretty_date }}
+            </td>
+            <td class="text-center">
+                <span class="fw-light">{% if row[3] is not none %} ({{ row[3] | pretty_odds }}) {% endif %}</span>
+                <span class="fs-6 text {% if row[2] == row[6] %}text-success fw-semibold{% elif row[4] == row[6] %}text-danger{% endif %}">
+                {{ row[2] }}</span> vs 
+                <span class="fs-6 text {% if row[4] == row[6] %}text-success fw-semibold{% elif row[2] == row[6] %}text-danger{% endif %}">
+                {{ row[4] }}</span>
+                <span class="fw-light">{% if row[5] is not none %} ({{ row[5] | pretty_odds }}) {% endif %}</span>
+            </td>
+            <td class="text-center">
+                {{ row[7] | pretty_none }}
+            </td>
+            <td class="text-start">
+                {% if row[9] == 1 %}
+                    {% set ns.tips = ns.tips + 1 %}
+                    {% set ns.matches = ns.matches + 1 %}
+                    <span class="text-success">&#x2705; {{ row[8] }}</span>
+                {% elif row[9] == 0 %}
+                    {% set ns.matches = ns.matches + 1 %}
+                    <span class="text-danger">&#x274C; {{ row[8] }}</span>
+                {% else %}
+                    {{ row[8] | pretty_none }}
+                {% endif %}
+            </td>
+        </tr>
+{% endfor %}
+
+{##### Final End of Table #####}
+{% if stats|length > 1 %}
+    {% if stats[1][2] > 0 %}
+        <tfoot><tr>
+        <td class="fw-bold text-end" colspan="3">TOTAL</td>
+        <td class="w-bold text-start">{{ stats[1][1] | int }} / {{ stats[1][2] }}</td>
+        </tr></tfoot>
+    {% endif %}
+{% endif %}
         </tbody>
-        <tfoot>
-            <tr>
-                <td class="fw-bold text-end" colspan="3">TOTAL</td>
-                <td class="w-bold text-start">{{ ns.tips }} / {{ ns.matches }}</td>
-            </tr>
-        </tfoot>
     </table>
 </div>
 
 
-
-{# <hr class="col-3 col-md-2 mb-5"> #}
-
 <div class="row g-5">
+    {##### Season Stats #####}
       <div class="col-md-6">
-        <h4 class="text-center">Season {{ year }}</h4>
+        <h4 class="text-center">Season {{ season }}</h4>
         <div class="text-center fs-6 text">
             <span data-feather="bar-chart-2" class="align-text-middle"></span>
-            {{ stats[1] | int }} out of {{ stats[2] | int }}
+            {{ stats[0][1] | int }} out of {{ stats[0][2] | int }}
         </div>
         <div class="text-center fs-6 text">
             <span data-feather="pie-chart" class="align-text-middle"></span>
-            {{ stats[3] }}%
+            {{ stats[0][3] }}%
         </div>
         <canvas class="my-4 w-100" id="myChart1" width="900" height="380"></canvas>
       </div>
 
-
-      <div class="col-md-6">
-        <h4 class="text-center">Round {{ round }}</h4>
-        <div class="text-center fs-6 text">
-            <span data-feather="bar-chart-2" class="align-text-middle"></span>
-            {{ ns.tips }} out of {{ ns.matches }}
+    {##### Round Stats #####}
+      {% if stats|length > 1 %}
+        {% if stats[1][2] > 0 %}
+        <div class="col-md-6">
+            <h4 class="text-center">Round {{ round }}</h4>
+            <div class="text-center fs-6 text">
+                <span data-feather="bar-chart-2" class="align-text-middle"></span>
+                {{ stats[1][1] | int }} out of {{ stats[1][2] | int }}
+            </div>
+            <div class="text-center fs-6 text">
+                <span data-feather="pie-chart" class="align-text-middle"></span>
+                {{ stats[0][3] }}%
+            </div>
+            <canvas class="my-4 w-100" id="myChart2" width="900" height="380"></canvas>
         </div>
-        <div class="text-center fs-6 text">
-            <span data-feather="pie-chart" class="align-text-middle"></span>
-            {{ '%0.1f' % ((ns.tips / ns.matches) * 100) | float }}%
-        </div>
-        <canvas class="my-4 w-100" id="myChart2" width="900" height="380"></canvas>
-      </div>
-
+        {% endif %}
+      {% endif %}
 </div>
+
+{# <hr class="col-3 col-md-2 mb-5"> #}
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
 <script>
@@ -163,7 +170,7 @@
         labels: ['Tipped correctly','Tipped incorrectly'],
         datasets: [{
             label: 'Season',
-            data: {% set x = stats[2]-stats[1] %} [{{ stats[1] | int }},{{ x | int }}],
+            data: {% set x = stats[0][2]-stats[0][1] %} [{{ stats[0][1] | int }},{{ x | int }}],
             backgroundColor: [
             'rgb(54, 162, 235)',
             'rgb(255, 99, 132)'
@@ -175,7 +182,7 @@
         labels: ['Tipped correctly','Tipped incorrectly'],
         datasets: [{
             label: 'Round',
-            data: [{{ ns.tips }},{{ ns.matches - ns.tips }}],
+            data: {% if stats|length > 1 %}{% set x = stats[1][2]-stats[1][1] %} [{{ stats[1][1] | int }},{{ x | int }}]{% else %} []{% endif%},
             backgroundColor: [
             'rgb(54, 162, 235)',
             'rgb(255, 99, 132)'
