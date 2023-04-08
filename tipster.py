@@ -23,7 +23,7 @@ YEAR = datetime.today().year
 DB = "afl_tipster.db"
 CSV_FILE = "tipster_data.csv"
 CSV_URL = "https://gist.githubusercontent.com/nickneos/4856afa4c53150bf36b72eea66178892/raw/34790c0375b12d6edf9118712da48d16b3ec9e39/tipster_data.csv"
-MENU = [
+CLI_MENU = [
     "Print Current Round with Tipster's Picks",
     "Print Round (n)",
     "Simulate Prior Seasons",
@@ -409,7 +409,7 @@ def get_stats(year=YEAR, round=0):
         SELECT Year as Season,
             sum(TipOutcome) as `Tip Score`,
             count(*) as `No of Matches`,
-            round((sum(TipOutcome)/count(*)) * 100, 1) as `Percentage (%)`
+            round((sum(TipOutcome * 1.0)/count(*)) * 100, 1) as `Percentage (%)`
         FROM tbl_fixture
         WHERE tipoutcome is not null
             AND Year = ? 
@@ -464,14 +464,14 @@ def get_history(db=DB, SeasonStart=2013, cli=False):
         SELECT Year as Season,
             sum(TipOutcome) as `Tip Score`,
             count(*) as `No of Matches`,
-            round((sum(TipOutcome)/count(*)) * 100, 1) as `Percentage (%)`
+            round((sum(TipOutcome * 1.0)/count(*)) * 100, 1) as `Percentage (%)`
         FROM tbl_fixture
         WHERE Year < ?
         GROUP BY Year
         UNION SELECT 'Total' as Season,
             sum(TipOutcome) as `Tip Score`,
             count(*) as `No of Matches`,
-            round((sum(TipOutcome)/count(*)) * 100, 1) as `Percentage (%)`
+            round((sum(TipOutcome * 1.0)/count(*)) * 100, 1) as `Percentage (%)`
         FROM tbl_fixture
         WHERE Year < ?
     ''', (YEAR, YEAR))
@@ -485,19 +485,19 @@ def tipster_cli():
     """ Prints out user menu """
 
     # print menu
-    for i, m in enumerate(MENU):
+    for i, m in enumerate(CLI_MENU):
         print(f"{OKBLUE}[{i+1}] {m}{ENDC}")
 
     # get user selection
     while True:
         try:
-            sel = int(input(f"\n{OKCYAN}Select option [1] to [{len(MENU)}]: {ENDC}"))
+            sel = int(input(f"\n{OKCYAN}Select option [1] to [{len(CLI_MENU)}]: {ENDC}"))
         except:
             continue
-        if sel >= 1 and sel <= len(MENU):
+        if sel >= 1 and sel <= len(CLI_MENU):
             break
 
-    return MENU[sel - 1]
+    return CLI_MENU[sel - 1]
 
 
 if __name__ == '__main__':
@@ -511,19 +511,19 @@ if __name__ == '__main__':
         sel = tipster_cli()
 
         # [MENU OPTION 1] Print current round with tipsters picks
-        if sel == MENU[0]:
+        if sel == CLI_MENU[0]:
             get_current_round(cli=True)
 
         # [MENU OPTION 2] Print selected round
-        elif sel == MENU[1]:
+        elif sel == CLI_MENU[1]:
             get_matches(cli=True)
 
         # [MENU OPTION 3] Simulate
-        elif sel == MENU[2]:
+        elif sel == CLI_MENU[2]:
             get_history(cli=True)
 
         # [MENU OPTION 4] PRINT AFL LADDER
-        elif sel == MENU[3]:
+        elif sel == CLI_MENU[3]:
             get_ladder(cli=True)
 
         # [MENU OPTION EXIT]
