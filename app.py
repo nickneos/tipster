@@ -15,8 +15,9 @@ rounds = tipster.db_qry(db, "select distinct round from tbl_fixture where year =
 
 @app.route("/")
 def index():
-    '''TODO'''
-
+    ''' Shows main page of tipster, which shows the data
+        for the matches in the current round
+    '''
     data = tipster.get_current_round()
     round = data[0][1]
     season = year
@@ -37,7 +38,7 @@ def index():
 
 @app.route("/search")
 def search():
-    '''TODO'''
+    '''Show matches based on user input'''
 
     round = int(request.args.get("r", 0))
     season = int(request.args.get("y", year))
@@ -64,7 +65,7 @@ def search():
 
 @app.route("/history")
 def history():
-    '''TODO'''
+    '''Show historical perfomance of the tipster algorithm'''
 
     data = tipster.get_history()
     
@@ -102,4 +103,4 @@ def pretty_none(str):
     
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', debug=True)

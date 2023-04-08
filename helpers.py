@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 import re
 import sqlite3
@@ -5,9 +6,9 @@ import sqlite3
 from datetime import datetime, timezone
 
 YEAR = datetime.today().year
-DB = "afl_tipster.db"
+DB = "tipster.db"
 CSV_FILE = "tipster_data.csv"
-CSV_URL = "https://gist.githubusercontent.com/nickneos/4856afa4c53150bf36b72eea66178892/raw/34790c0375b12d6edf9118712da48d16b3ec9e39/tipster_data.csv"
+CSV_URL = "https://raw.githubusercontent.com/nickneos/tipster/main/tipster_data.csv"
 
 # Colours
 HEADER = '\033[95m'
@@ -30,6 +31,7 @@ def db_import_csv(db, csv):
 
         # load into df
         df = pd.read_csv(csv)
+        df = clean_df(df)
 
         # write to sql
         df.to_sql('tbl_fixture', conn, if_exists='replace', index = False)
@@ -102,13 +104,14 @@ def db_print(data, columns):
     if type(columns) is not list:
         columns = re.split(", ", columns)
 
-    
+
     if type(data) is tuple:
         ldata = []
         ldata.append(data)
         data = ldata
 
     df = pd.DataFrame(data, columns=columns)
+    df = clean_df(df)
 
     # print df
     print(f"\n{df.to_string(index=False)}\n")
@@ -120,6 +123,7 @@ def sql_to_csv(sql_qry, csv=CSV_FILE, db=DB):
     try:
         conn = sqlite3.connect(db)
         df = pd.read_sql_query(sql_qry, conn)
+        df = clean_df(df)
         df.to_csv(csv, index=False)
         conn.close
 
@@ -155,3 +159,14 @@ def utc_to_local(utc_dt):
             utc_dt = None
 
     return utc_dt.replace(tzinfo=timezone.utc).astimezone(tz=None)
+
+
+def clean_df(df):
+    """ Clean data in tipster dataframe """
+
+    try:
+        df['TipOutcome'] = df['TipOutcome'].astype('Int64')
+    except:
+        pass
+
+    return df
