@@ -1,16 +1,18 @@
 import tipster
 
 from datetime import datetime
-from flask import Flask, redirect, render_template, request
+from flask import Flask, render_template, request
 
 # Configure application
 app = Flask(__name__)
 
+# initialize
 db = tipster.DB
 tipster.tipster_load()
 year = tipster.db_qry(db, "select min(year) from tbl_fixture where GameTimeUTC > current_date")
 seasons = tipster.db_qry(db, "select distinct year from tbl_fixture order by 1 desc")
 rounds = tipster.db_qry(db, "select distinct round from tbl_fixture where year = ? order by 1", (year,))
+updated = datetime.now()
 
 
 @app.route("/")
@@ -18,6 +20,16 @@ def index():
     ''' Shows main page of tipster, which shows the data
         for the matches in the current round
     '''
+    # update tipster data if it hasn't been updated in last 15 mins
+    try:
+        if (datetime.now() - updated).total_seconds() / 60.0 < 15:
+            tipster.update_odds()
+            tipster.update_results()
+            updated = datetime.now()
+    except:
+        pass
+
+    # get data for current round
     data = tipster.get_current_round()
     round = data[0][1]
     season = year
@@ -40,8 +52,18 @@ def index():
 def search():
     '''Show matches based on user input'''
 
+    # get user input
     round = int(request.args.get("r", 0))
     season = int(request.args.get("y", year))
+
+    # update tipster data if it hasn't been updated in last 15 mins
+    try:
+        if (datetime.now() - updated).total_seconds() / 60.0 < 15:
+            tipster.update_odds()
+            tipster.update_results()
+            updated = datetime.now()
+    except:
+        pass
 
     if season == 0:
         season = year
