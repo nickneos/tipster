@@ -37,9 +37,9 @@
         <li><hr class="dropdown-divider"></li>
         {% for r in rounds %}
             {% if r == round %}
-                <li><a class="dropdown-item active" href="/search?y={{ season }}&r={{ r }}">Round {{ r }}</a></li>
+                <li><a class="dropdown-item active" href="/search?r={{ r }}">Round {{ r }}</a></li>
             {% else %}
-                <li><a class="dropdown-item" href="/search?y={{ season }}&r={{ r }}">Round {{ r }}</a></li>
+                <li><a class="dropdown-item" href="/search?r={{ r }}">Round {{ r }}</a></li>
             {% endif %}
         {% endfor %}            
     </ul>

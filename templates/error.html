@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+
+{% block main %}
+
+
+<h1 class="text-body-emphasis">Ooops...That wasn't supposed to happen!</h1>
+<br>
+<div class="text-start">
+    <a class="btn btn-sm btn-outline-secondary" href="/history">
+        <span data-feather="bar-chart-2" class="align-text-bottom"></span>
+        History
+    </a>
+
+    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+        <span data-feather="calendar" class="align-text-bottom"></span>
+        Season
+    </button>
+    <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="/search?r=0">Current Season</a></li>
+        <li><hr class="dropdown-divider"></li>
+        {% for s in seasons %}
+            {% if s == season %}
+                <li><a class="dropdown-item active" href="/search?y={{ s }}&r=0">{{ s }}</a></li>
+            {% else %}
+                <li><a class="dropdown-item" href="/search?y={{ s }}&r=0">{{ s }}</a></li>
+            {% endif %}
+        {% endfor %}        
+    </ul>
+
+    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+        <span data-feather="hash" class="align-text-bottom"></span>
+        Round
+    </button>
+    <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="/">Current Round</a></li>
+        <li><hr class="dropdown-divider"></li>
+        {% for r in rounds %}
+            {% if r == round %}
+                <li><a class="dropdown-item active" href="/search?r={{ r }}">Round {{ r }}</a></li>
+            {% else %}
+                <li><a class="dropdown-item" href="/search?r={{ r }}">Round {{ r }}</a></li>
+            {% endif %}
+        {% endfor %}            
+    </ul>
+    
+</div>
+
+
+<div class="text-center fs-6 text">
+    <br>
+    <!-- https://memegen.link/ -->
+    <img alt="{{ top }}" class="border img-fluid" src="https://api.memegen.link/images/sadfrog/{{ top | urlencode }}/{{ bottom | urlencode }}.gif" title="{{ top }}">
+</div>
+
+{% endblock %}

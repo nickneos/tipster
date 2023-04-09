@@ -1968,8 +1968,8 @@ ID,Year,Competition,Round,GameTimeUTC,GameTimeLocal,HomeTeam,AwayTeam,Ground,Sco
 7214,2023,HA,4,2023-04-08 06:35:00+00:00,2023-04-08 16:35:00+10:00,Richmond,Western Bulldogs,MCG,84-89,Western Bulldogs,1.52,2.49,Richmond,0
 7215,2023,HA,4,2023-04-08 09:30:00+00:00,2023-04-08 19:30:00+10:00,St Kilda,Gold Coast,Docklands,113-60,St Kilda,1.53,2.45,St Kilda,1
 7216,2023,HA,4,2023-04-08 09:30:00+00:00,2023-04-08 19:30:00+10:00,Sydney,Port Adelaide,SCG,64-66,Port Adelaide,1.31,3.35,Sydney,0
-7217,2023,HA,4,2023-04-09 04:10:00+00:00,2023-04-09 14:10:00+10:00,Essendon,GWS,Docklands,,,1.46,2.65,Essendon,
-7218,2023,HA,4,2023-04-09 07:20:00+00:00,2023-04-09 17:20:00+10:00,West Coast,Melbourne,Perth,,,8.5,1.06,Melbourne,
+7217,2023,HA,4,2023-04-09 04:10:00+00:00,2023-04-09 14:10:00+10:00,Essendon,GWS,Docklands,88-75,Essendon,1.46,2.65,Essendon,1
+7218,2023,HA,4,2023-04-09 07:20:00+00:00,2023-04-09 17:20:00+10:00,West Coast,Melbourne,Perth,63-126,Melbourne,8.5,1.06,Melbourne,1
 7219,2023,HA,4,2023-04-10 05:20:00+00:00,2023-04-10 15:20:00+10:00,Geelong,Hawthorn,MCG,,,1.17,4.9,Geelong,
 7220,2023,HA,5,2023-04-13 09:40:00+00:00,2023-04-13 19:40:00+10:00,Adelaide,Carlton,Adelaide,,,,,,
 7221,2023,HA,5,2023-04-14 07:10:00+00:00,2023-04-14 17:10:00+10:00,Fremantle,Gold Coast,,,,,,,
