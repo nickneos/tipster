@@ -1,21 +1,21 @@
 # Tipster
 - [Tipster](#tipster)
   - [Overview](#overview)
+  - [Video Demo:](#video-demo)
   - [I'm not Australian...What is AFL Tipping?](#im-not-australianwhat-is-afl-tipping)
   - [How does Tipster work?](#how-does-tipster-work)
-  - [What is the algorithm in `tip_wizard()`](#what-is-the-algorithm-in-tip_wizard)
-  - [Can the algorithm be changed?](#can-the-algorithm-be-changed)
-  - [How good is the algorithm?](#how-good-is-the-algorithm)
   - [Key files in this repo:](#key-files-in-this-repo)
-    - [app.py](#apppy)
     - [tipster.py](#tipsterpy)
     - [helpers.py](#helperspy)
+    - [app.py](#apppy)
     - [wsgi.py](#wsgipy)
     - [tipster.db](#tipsterdb)
     - [tipster\_data.csv](#tipster_datacsv)
     - [static/](#static)
     - [templates/](#templates)
-  - [Video Demo:](#video-demo)
+  - [What is the tipping algorithm in `tip_wizard()`](#what-is-the-tipping-algorithm-in-tip_wizard)
+  - [Can the algorithm be changed?](#can-the-algorithm-be-changed)
+  - [How good is the algorithm?](#how-good-is-the-algorithm)
 
 
 ## Overview
@@ -23,6 +23,9 @@
 Tipster is a web app built with Flask, that helps you pick winners for your [AFL Tipping](#im-not-australianwhat-is-afl-tipping) competition!
 
 I created this as part of my [Final Project](https://cs50.harvard.edu/x/2023/project/) submission for [CS50x](https://cs50.harvard.edu/x/2023/)
+
+## Video Demo:  
+https://youtu.be/e0ATyq11wfM
 
 ## I'm not Australian...What is AFL Tipping?
 
@@ -45,43 +48,23 @@ Via the web interface you can:
 - Pick any season from 2013 to 2023, and see the same data as in prior point, but for the whole season
 - view historical tipping performance of Tipster
 
-## What is the algorithm in `tip_wizard()`
-The algorithm I have programmed is basically the mental algorithm I use when I pick tips manually:
-1. Betting Odds: if the bookmakers have a heavy favorite, I will almost always pick that team straight away (unless it's my favorite team who I may be more lenient on). The closer the odds are to each other for either team to win, then the less emphasis I place on odds. (e.g. if Team A is the favorite at $1.72 vs team b who is $2.10, I may not factor the odds that much into my decision)
-2. I may give more weight to the team that is playing at their home ground, especially if it's an interstate team. By interstate, I mean teams not based in Victoria which is where the majority of AFL teams are based.
-3. Each teams ladder position and any winning streaks they have currently.
-
-## Can the algorithm be changed?
-In `tipster.py`, there are some global variables that are used by the algorithm which can be adjusted as desired. 
-
-For a future release I would like to move these global variable to a `settings.json` file for example, and potentially have functionality in the web app to change these settings.
-
-## How good is the algorithm?
-
-The web app actually lets you check this yourself by clicking on `history`. This brings up Tipster's tipping performance for each prior AFL season from 2013. Whenever the history button is clicked, the `get_history()` function in `tipster.py` will calculate on the fly; which team it would have picked for each match in all the prior seasons in the database. This means if the algorithm settings are ever changed, the tipping performance will adjust accordingly (based on the new settings) since it's calculated on the fly.
-
 ## Key files in this repo:
 
-### app.py
-
-This is the flask app serving the web frontend for Tipster.
-
-It handles 3 routes (`/`, `/search` and `/history`); the error handling for the website; and some custom jinja function for the template files.
-
 ### tipster.py
-
-This is the main python backbone of Tipster. It contains all the functions that process the tipster database, scrapes websites for match results and odds, queries the database for matches, calculates who to tip for upcoming matches, etc. It also contains a command line interface so that this python script can be run in a terminal independently of the flask app frontend.
+This is the main python backbone of Tipster. It contains all the functions that process the tipster database, scrapes websites for match results and odds, queries the database for matches, calculates who to tip for upcoming matches via the algorithm in `tip_wizard()`, etc. It also contains a command line interface so that this python script can be run in a terminal independently of the flask app frontend.
 
 ### helpers.py
-
 Some helpful functions that `tipster.py` uses.
 
-### wsgi.py
+### app.py
+This is the flask app serving the web frontend for Tipster.
 
+It handles 3 routes (`/`, `/search` and `/history`); the error handling for the website; and some custom jinja filters for the template files.
+
+### wsgi.py
 Needed only when self-hosting this web app with [gunicorn](https://gunicorn.org/).
 
 ### tipster.db
-
 The SQLite database that contains the table for storing all the Tipster backend data.
 
 The schema is as follows:
@@ -107,17 +90,32 @@ CREATE TABLE IF NOT EXISTS "tbl_fixture" (
 ```
 
 ### tipster_data.csv
-
 The initial dataset that is loaded into the database.
 
 ### static/
-
 This folder contains the JavaScript and CSS files used by the web application.
 
 ### templates/
-
 Contains the HTML files used by the web application.
 
 
-## Video Demo:  
-TODO
+## What is the tipping algorithm in `tip_wizard()`
+The algorithm I have programmed is basically the mental algorithm I use when I pick tips manually:
+1. Betting Odds: if the bookmakers have a heavy favorite, I will almost always pick that team straight away (unless it's my favorite team who I may be more lenient on). The closer the odds are to each other for either team to win, then the less emphasis I place on odds. (e.g. if Team A is the favorite at $1.72 vs team b who is $2.10, I may not factor the odds that much into my decision)
+2. I may give more weight to the team that is playing at their home ground, especially if it's an interstate team. By interstate, I mean teams not based in Victoria which is where the majority of AFL teams are based.
+3. Each teams ladder position and any winning streaks they have currently.
+
+## Can the algorithm be changed?
+In `tipster.py`, there are some global variables that are used by the algorithm which can be adjusted as desired. 
+
+For a future release I would like to move these global variables to a `settings.json` file for example, and potentially have functionality in the web app to change these settings.
+
+## How good is the algorithm?
+The web app actually lets you check this yourself by clicking on `history`. This brings up Tipster's tipping performance for each prior AFL season from 2013. 
+
+Whenever the history button is clicked, the `get_history()` function in `tipster.py` will calculate on the fly which team it would have picked for each match in all the prior seasons in the database. This means if the algorithm settings are ever changed, the tipping performance will adjust accordingly (based on the new settings) since it's calculated on the fly.
+
+
+
+
+
