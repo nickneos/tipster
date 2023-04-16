@@ -2,6 +2,7 @@ import os
 import pandas as pd
 import re
 import sqlite3
+import sys
 import urllib.request
 
 from bs4 import BeautifulSoup
@@ -51,22 +52,24 @@ ASCII_ART = f'' \
 
 
 def tipster_load(cli=False):
-    if cli:
-        # if csv doesnt exist, download
+    '''Initialise Tipster'''
+
+    # if db doesn't exits
+    if not os.path.exists(DB):
         if not os.path.exists(CSV_FILE):
             urllib.request.urlretrieve(CSV_URL, CSV_FILE)
 
         # create/update db from csv
         db_import_csv(DB, CSV_FILE)
 
-    # add local time column based on utc column
-    data = []
-    for row in db_qry(DB, "SELECT ID, GameTimeUTC FROM tbl_fixture "):
-        data.append({
-            "id": row[0],
-            "datetime": utc_to_local(row[1])
-        })
-    db_qry_many(DB, f"UPDATE tbl_fixture SET GameTimeLocal = :datetime WHERE ID = :id", data)
+        # add local time column based on utc column
+        data = []
+        for row in db_qry(DB, "SELECT ID, GameTimeUTC FROM tbl_fixture "):
+            data.append({
+                "id": row[0],
+                "datetime": utc_to_local(row[1])
+            })
+        db_qry_many(DB, f"UPDATE tbl_fixture SET GameTimeLocal = :datetime WHERE ID = :id", data)
 
     # update odds and results
     update_odds(DB)
@@ -74,6 +77,7 @@ def tipster_load(cli=False):
 
 
 def update_odds(db):
+    '''Scrape live odds from sportsbet'''
 
     try:
         # URL for scraping AFL odds
@@ -173,6 +177,7 @@ def update_odds(db):
 
 
 def update_results(db):
+    '''Update match results'''
 
     try:
 
@@ -240,7 +245,7 @@ def update_results(db):
 
 
 def tip_wizard(match):
-    """ Takes a dictionary representing a match, and returns the tipsters pick """
+    '''Takes a dictionary representing a match, and returns the tipsters pick'''
 
     team1 = match["Home_Team"]
     team2 = match["Away_Team"]
@@ -309,7 +314,7 @@ def tip_wizard(match):
 
 
 def get_ladder(db=DB, cli=False):
-    """ Gets AFL Ladder and updates db """
+    '''Gets AFL Ladder and updates db'''
 
     url = f"https://www.footywire.com/afl/footy/ft_ladder?year={YEAR}"
 
@@ -341,7 +346,7 @@ def get_ladder(db=DB, cli=False):
 
 
 def get_current_round(cli = False):
-
+    '''Returns current round data from the Tipster DB'''
     # get round number that is the round in progress (or upcoming round if none in progress)
     today = datetime.today().date()
     curr_rnd =  db_qry(DB, f"SELECT MIN(round) FROM tbl_fixture WHERE gametimelocal >= ?", (today,))
@@ -376,6 +381,7 @@ def get_current_round(cli = False):
 
 
 def get_matches(year=YEAR, round=0, cli=False):
+    '''Returns data from the Tipster DB based on year and round parameters'''
     
     # prompt for round if using CLI
     if cli:
@@ -401,6 +407,7 @@ def get_matches(year=YEAR, round=0, cli=False):
 
 
 def get_stats(year=YEAR, round=0):
+    '''Return tipping stats for selected year/round'''
 
     param = (year,)
     sql = f'''
@@ -423,6 +430,7 @@ def get_stats(year=YEAR, round=0):
 
 
 def get_history(db=DB, SeasonStart=2013, cli=False):
+    '''Return historical tipping performance'''
 
     # iterate through every year/season in data
     for y in range(SeasonStart, YEAR):
@@ -480,7 +488,7 @@ def get_history(db=DB, SeasonStart=2013, cli=False):
 
 
 def tipster_cli():
-    """ Prints out user menu """
+    '''Prints out user menu'''
 
     # print menu
     for i, m in enumerate(CLI_MENU):
@@ -500,32 +508,35 @@ def tipster_cli():
 
 if __name__ == '__main__':
 
-    tipster_load(cli=True)
+    # initialise tipster
+    tipster_load()
+
 
     ##### USER MENU #####
-    print(f"\n{HEADER}{ASCII_ART}{ENDC}\n")
+    if len(sys.argv) > 1 and sys.argv[1].lower() == "menu":
+        print(f"\n{HEADER}{ASCII_ART}{ENDC}\n")
 
-    while True:
-        sel = tipster_cli()
+        while True:
+            sel = tipster_cli()
 
-        # [MENU OPTION 1] Print current round with tipsters picks
-        if sel == CLI_MENU[0]:
-            get_current_round(cli=True)
+            # [MENU OPTION 1] Print current round with tipsters picks
+            if sel == CLI_MENU[0]:
+                get_current_round(cli=True)
 
-        # [MENU OPTION 2] Print selected round
-        elif sel == CLI_MENU[1]:
-            get_matches(cli=True)
+            # [MENU OPTION 2] Print selected round
+            elif sel == CLI_MENU[1]:
+                get_matches(cli=True)
 
-        # [MENU OPTION 3] Simulate
-        elif sel == CLI_MENU[2]:
-            get_history(cli=True)
+            # [MENU OPTION 3] Simulate
+            elif sel == CLI_MENU[2]:
+                get_history(cli=True)
 
-        # [MENU OPTION 4] PRINT AFL LADDER
-        elif sel == CLI_MENU[3]:
-            get_ladder(cli=True)
+            # [MENU OPTION 4] PRINT AFL LADDER
+            elif sel == CLI_MENU[3]:
+                get_ladder(cli=True)
 
-        # [MENU OPTION EXIT]
-        if sel.lower() == "exit":
-            # write back to csv
-            sql_to_csv("select * from tbl_fixture")
-            break
+            # [MENU OPTION EXIT]
+            if sel.lower() == "exit":
+                # write back to csv
+                sql_to_csv("select * from tbl_fixture")
+                break
