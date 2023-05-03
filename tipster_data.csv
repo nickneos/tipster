@@ -1972,41 +1972,41 @@ ID,Year,Competition,Round,GameTimeUTC,GameTimeLocal,HomeTeam,AwayTeam,Ground,Sco
 7218,2023,HA,4,2023-04-09 07:20:00+00:00,2023-04-09 17:20:00+10:00,West Coast,Melbourne,Perth,63-126,Melbourne,8.5,1.06,Melbourne,1
 7219,2023,HA,4,2023-04-10 05:20:00+00:00,2023-04-10 15:20:00+10:00,Geelong,Hawthorn,MCG,127-45,Geelong,1.15,5.25,Geelong,1
 7220,2023,HA,5,2023-04-13 09:40:00+00:00,2023-04-13 19:40:00+10:00,Adelaide,Carlton,Adelaide,118-62,Adelaide,2.0,1.8,Carlton,0
-7221,2023,HA,5,2023-04-14 07:10:00+00:00,2023-04-14 17:10:00+10:00,Fremantle,Gold Coast,,100-90,Fremantle,1.59,2.32,Fremantle,1
-7222,2023,HA,5,2023-04-14 10:10:00+00:00,2023-04-14 20:10:00+10:00,Richmond,Sydney,Adelaide,78-122,Sydney,2.53,1.5,Sydney,1
+7221,2023,HA,5,2023-04-14 07:10:00+00:00,2023-04-14 17:10:00+10:00,Fremantle,Gold Coast,,100-90,Fremantle,1.57,2.35,Fremantle,1
+7222,2023,HA,5,2023-04-14 10:10:00+00:00,2023-04-14 20:10:00+10:00,Richmond,Sydney,Adelaide,78-122,Sydney,2.36,1.57,Sydney,1
 7223,2023,HA,5,2023-04-15 03:10:00+00:00,2023-04-15 13:10:00+10:00,Brisbane,North Melbourne,,152-77,Brisbane,1.2,4.4,Brisbane,1
 7224,2023,HA,5,2023-04-15 06:10:00+00:00,2023-04-15 16:10:00+10:00,Essendon,Melbourne,Adelaide,104-77,Essendon,3.35,1.31,Melbourne,0
 7225,2023,HA,5,2023-04-15 09:50:00+00:00,2023-04-15 19:50:00+10:00,Port Adelaide,Western Bulldogs,Adelaide,70-56,Port Adelaide,1.46,2.66,Port Adelaide,1
 7226,2023,HA,5,2023-04-16 03:10:00+00:00,2023-04-16 13:10:00+10:00,Geelong,West Coast,Adelaide,136-89,Geelong,1.05,9.5,Geelong,1
 7227,2023,HA,5,2023-04-16 05:20:00+00:00,2023-04-16 15:20:00+10:00,GWS,Hawthorn,,77-75,GWS,1.41,2.85,GWS,1
-7228,2023,HA,5,2023-04-16 06:50:00+00:00,2023-04-16 16:50:00+10:00,Collingwood,St Kilda,Adelaide,70-64,Collingwood,1.43,2.77,Collingwood,1
-7229,2023,HA,6,2023-04-21 10:10:00+00:00,2023-04-21 20:10:00+10:00,Fremantle,Western Bulldogs,Perth,,,1.86,1.98,,
-7230,2023,HA,6,2023-04-22 03:45:00+00:00,2023-04-22 13:45:00+10:00,Port Adelaide,West Coast,Adelaide,,,1.06,9.3,,
-7231,2023,HA,6,2023-04-22 06:35:00+00:00,2023-04-22 16:35:00+10:00,GWS,Brisbane,Manuka,,,3.19,1.36,,
-7232,2023,HA,6,2023-04-22 09:25:00+00:00,2023-04-22 19:25:00+10:00,Geelong,Sydney,Kardinia,,,1.49,2.64,,
-7233,2023,HA,6,2023-04-23 03:10:00+00:00,2023-04-23 13:10:00+10:00,Hawthorn,Adelaide,Launceston,,,3.66,1.29,,
-7234,2023,HA,6,2023-04-23 05:20:00+00:00,2023-04-23 15:20:00+10:00,Carlton,St Kilda,Docklands,,,1.7,2.16,,
-7235,2023,HA,6,2023-04-23 06:40:00+00:00,2023-04-23 16:40:00+10:00,Gold Coast,North Melbourne,,,,1.42,2.89,,
-7236,2023,HA,6,2023-04-24 09:20:00+00:00,2023-04-24 19:20:00+10:00,Melbourne,Richmond,MCG,,,1.29,3.62,,
-7237,2023,HA,6,2023-04-25 05:20:00+00:00,2023-04-25 15:20:00+10:00,Collingwood,Essendon,MCG,,,1.4,2.96,,
-7238,2023,HA,7,2023-04-28 09:50:00+00:00,2023-04-28 19:50:00+10:00,St Kilda,Port Adelaide,Docklands,,,,,,
-7239,2023,HA,7,2023-04-29 03:45:00+00:00,2023-04-29 13:45:00+10:00,Brisbane,Fremantle,Gabba,,,,,,
-7240,2023,HA,7,2023-04-29 04:10:00+00:00,2023-04-29 14:10:00+10:00,Sydney,GWS,SCG,,,,,,
-7241,2023,HA,7,2023-04-29 06:35:00+00:00,2023-04-29 16:35:00+10:00,Western Bulldogs,Hawthorn,Docklands,,,,,,
-7242,2023,HA,7,2023-04-29 09:25:00+00:00,2023-04-29 19:25:00+10:00,Melbourne,North Melbourne,MCG,,,,,,
-7243,2023,HA,7,2023-04-29 09:30:00+00:00,2023-04-29 19:30:00+10:00,West Coast,Carlton,Perth,,,,,,
-7244,2023,HA,7,2023-04-30 03:10:00+00:00,2023-04-30 13:10:00+10:00,Essendon,Geelong,MCG,,,,,,
-7245,2023,HA,7,2023-04-30 05:20:00+00:00,2023-04-30 15:20:00+10:00,Richmond,Gold Coast,Docklands,,,,,,
-7246,2023,HA,7,2023-04-30 06:40:00+00:00,2023-04-30 16:40:00+10:00,Adelaide,Collingwood,Adelaide,,,,,,
-7247,2023,HA,8,2023-05-05 09:50:00+00:00,2023-05-05 19:50:00+10:00,Carlton,Brisbane,Docklands,,,,,,
-7248,2023,HA,8,2023-05-06 03:45:00+00:00,2023-05-06 13:45:00+10:00,Richmond,West Coast,MCG,,,,,,
-7249,2023,HA,8,2023-05-06 04:10:00+00:00,2023-05-06 14:10:00+10:00,Geelong,Adelaide,Kardinia,,,,,,
-7250,2023,HA,8,2023-05-06 06:35:00+00:00,2023-05-06 16:35:00+10:00,Gold Coast,Melbourne,,,,,,,
-7251,2023,HA,8,2023-05-06 09:25:00+00:00,2023-05-06 19:25:00+10:00,GWS,Western Bulldogs,Manuka,,,,,,
-7252,2023,HA,8,2023-05-06 09:30:00+00:00,2023-05-06 19:30:00+10:00,Fremantle,Hawthorn,Perth,,,,,,
-7253,2023,HA,8,2023-05-07 03:10:00+00:00,2023-05-07 13:10:00+10:00,Port Adelaide,Essendon,Adelaide,,,,,,
-7254,2023,HA,8,2023-05-07 05:20:00+00:00,2023-05-07 15:20:00+10:00,Collingwood,Sydney,MCG,,,,,,
-7255,2023,HA,8,2023-05-07 06:40:00+00:00,2023-05-07 16:40:00+10:00,North Melbourne,St Kilda,Docklands,,,,,,
+7228,2023,HA,5,2023-04-16 06:50:00+00:00,2023-04-16 16:50:00+10:00,Collingwood,St Kilda,Adelaide,70-64,Collingwood,1.46,2.66,Collingwood,1
+7229,2023,HA,6,2023-04-21 10:10:00+00:00,2023-04-21 20:10:00+10:00,Fremantle,Western Bulldogs,Perth,69-118,Western Bulldogs,1.8,2.0,Fremantle,0
+7230,2023,HA,6,2023-04-22 03:45:00+00:00,2023-04-22 13:45:00+10:00,Port Adelaide,West Coast,Adelaide,109-69,Port Adelaide,1.05,9.5,Port Adelaide,1
+7231,2023,HA,6,2023-04-22 06:35:00+00:00,2023-04-22 16:35:00+10:00,GWS,Brisbane,Manuka,87-108,Brisbane,3.25,1.33,Brisbane,1
+7232,2023,HA,6,2023-04-22 09:25:00+00:00,2023-04-22 19:25:00+10:00,Geelong,Sydney,Kardinia,130-37,Geelong,1.39,2.92,Geelong,1
+7233,2023,HA,6,2023-04-23 03:10:00+00:00,2023-04-23 13:10:00+10:00,Hawthorn,Adelaide,Launceston,76-79,Adelaide,3.7,1.25,Adelaide,1
+7234,2023,HA,6,2023-04-23 05:20:00+00:00,2023-04-23 15:20:00+10:00,Carlton,St Kilda,Docklands,60-82,St Kilda,2.08,1.75,Carlton,0
+7235,2023,HA,6,2023-04-23 06:40:00+00:00,2023-04-23 16:40:00+10:00,Gold Coast,North Melbourne,,97-54,Gold Coast,1.2,4.4,Gold Coast,1
+7236,2023,HA,6,2023-04-24 09:20:00+00:00,2023-04-24 19:20:00+10:00,Melbourne,Richmond,MCG,96-78,Melbourne,1.26,3.75,Melbourne,1
+7237,2023,HA,6,2023-04-25 05:20:00+00:00,2023-04-25 15:20:00+10:00,Collingwood,Essendon,MCG,90-77,Collingwood,1.49,2.57,Collingwood,1
+7238,2023,HA,7,2023-04-28 09:50:00+00:00,2023-04-28 19:50:00+10:00,St Kilda,Port Adelaide,Docklands,76-83,Port Adelaide,1.48,2.59,St Kilda,0
+7239,2023,HA,7,2023-04-29 03:45:00+00:00,2023-04-29 13:45:00+10:00,Brisbane,Fremantle,Gabba,115-67,Brisbane,1.16,5.0,Brisbane,1
+7240,2023,HA,7,2023-04-29 04:10:00+00:00,2023-04-29 14:10:00+10:00,Sydney,GWS,SCG,106-107,GWS,1.28,3.6,Sydney,0
+7241,2023,HA,7,2023-04-29 06:35:00+00:00,2023-04-29 16:35:00+10:00,Western Bulldogs,Hawthorn,Docklands,94-65,Western Bulldogs,1.2,4.35,Western Bulldogs,1
+7242,2023,HA,7,2023-04-29 09:25:00+00:00,2023-04-29 19:25:00+10:00,Melbourne,North Melbourne,MCG,139-49,Melbourne,1.05,9.5,Melbourne,1
+7243,2023,HA,7,2023-04-29 09:30:00+00:00,2023-04-29 19:30:00+10:00,West Coast,Carlton,Perth,44-152,Carlton,4.7,1.18,Carlton,1
+7244,2023,HA,7,2023-04-30 03:10:00+00:00,2023-04-30 13:10:00+10:00,Essendon,Geelong,MCG,104-132,Geelong,2.73,1.42,Geelong,1
+7245,2023,HA,7,2023-04-30 05:20:00+00:00,2023-04-30 15:20:00+10:00,Richmond,Gold Coast,Docklands,48-72,Gold Coast,1.41,2.85,Richmond,0
+7246,2023,HA,7,2023-04-30 06:40:00+00:00,2023-04-30 16:40:00+10:00,Adelaide,Collingwood,Adelaide,58-59,Collingwood,2.27,1.61,Collingwood,1
+7247,2023,HA,8,2023-05-05 09:50:00+00:00,2023-05-05 19:50:00+10:00,Carlton,Brisbane,Docklands,,,1.84,1.96,Carlton,
+7248,2023,HA,8,2023-05-06 03:45:00+00:00,2023-05-06 13:45:00+10:00,Richmond,West Coast,MCG,,,1.11,6.7,Richmond,
+7249,2023,HA,8,2023-05-06 04:10:00+00:00,2023-05-06 14:10:00+10:00,Geelong,Adelaide,Kardinia,,,1.2,4.6,Geelong,
+7250,2023,HA,8,2023-05-06 06:35:00+00:00,2023-05-06 16:35:00+10:00,Gold Coast,Melbourne,,,,3.01,1.39,Melbourne,
+7251,2023,HA,8,2023-05-06 09:25:00+00:00,2023-05-06 19:25:00+10:00,GWS,Western Bulldogs,Manuka,,,2.5,1.54,Western Bulldogs,
+7252,2023,HA,8,2023-05-06 09:30:00+00:00,2023-05-06 19:30:00+10:00,Fremantle,Hawthorn,Perth,,,1.38,3.06,Fremantle,
+7253,2023,HA,8,2023-05-07 03:10:00+00:00,2023-05-07 13:10:00+10:00,Port Adelaide,Essendon,Adelaide,,,1.52,2.53,Port Adelaide,
+7254,2023,HA,8,2023-05-07 05:20:00+00:00,2023-05-07 15:20:00+10:00,Collingwood,Sydney,MCG,,,1.44,2.82,Collingwood,
+7255,2023,HA,8,2023-05-07 06:40:00+00:00,2023-05-07 16:40:00+10:00,North Melbourne,St Kilda,Docklands,,,6.05,1.13,St Kilda,
 7256,2023,HA,9,2023-05-12 09:20:00+00:00,2023-05-12 19:20:00+10:00,Richmond,Geelong,MCG,,,,,,
 7257,2023,HA,9,2023-05-12 10:40:00+00:00,2023-05-12 20:40:00+10:00,West Coast,Gold Coast,Perth,,,,,,
 7258,2023,HA,9,2023-05-13 03:45:00+00:00,2023-05-13 13:45:00+10:00,Sydney,Fremantle,SCG,,,,,,
