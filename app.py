@@ -6,7 +6,7 @@ from flask import Flask, abort, render_template, redirect, request
 # initialize
 db = tipster.DB
 tipster.tipster_load()
-year = tipster.db_qry(db, "select min(year) from tbl_fixture where GameTimeUTC > current_date")
+year = tipster.db_qry(db, "select coalesce(min(year), strftime('%Y', 'now')) from tbl_fixture where GameTimeUTC > current_date")
 seasons = tipster.db_qry(db, "select distinct year from tbl_fixture order by 1 desc")
 rounds = tipster.db_qry(db, "select distinct round from tbl_fixture where year = ? order by 1", (year,))
 
@@ -24,6 +24,8 @@ def index():
     tipster.update_odds(db)
     tipster.update_results(db)
     data = tipster.get_current_round()
+    if len(data) < 1:
+        return redirect("/search")
     stats = []
     stats.append(tipster.get_stats(year))
     stats.append(tipster.get_stats(year, data[0][1]))
